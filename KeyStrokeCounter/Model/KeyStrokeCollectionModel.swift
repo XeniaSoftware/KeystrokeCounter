@@ -18,7 +18,6 @@ class KeyStrokeCollectionModel: ObservableObject {
     }
     
     var total: Int {
-        print("Getting Total")
         return getModel().total
     }
     
@@ -41,8 +40,6 @@ class KeyStrokeCollectionModel: ObservableObject {
             keystrokeCollection[todayString] = model
         }
         
-        print(model.keystrokes.debugDescription)
-        print(model.total)
         return model
     }
     
