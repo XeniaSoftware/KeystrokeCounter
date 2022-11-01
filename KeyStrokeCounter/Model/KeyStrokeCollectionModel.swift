@@ -65,7 +65,7 @@ extension KeyStrokeCollectionModel {
     }
     
     private static var fileURL: URL {
-        return documentsFolder.appendingPathComponent("BGGCollection.data")
+        return documentsFolder.appendingPathComponent("KeystrokeCounter.data")
     }
     
     func load() {
@@ -74,7 +74,7 @@ extension KeyStrokeCollectionModel {
                 return
             }
             guard let collections = try? JSONDecoder().decode(Dictionary<String, KeyStrokeModel>.self, from: data) else {
-                fatalError("Can't decode saved contact data.")
+                fatalError("Can't decode saved keystroke data.")
             }
             DispatchQueue.main.async {
                 self?.keystrokeCollection = collections
