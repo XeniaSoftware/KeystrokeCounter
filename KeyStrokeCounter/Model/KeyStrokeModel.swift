@@ -8,8 +8,8 @@
 import Foundation
 import AppKit
 
-class KeyStrokeModel: ObservableObject {
-    @Published var keystrokes: Dictionary<String, Int> = [:]
+class KeyStrokeModel: Codable {
+    var keystrokes: Dictionary<String, Int> = [:]
     var total: Int {
         keystrokes.values.reduce(0, {(prev, current) -> Int in
             return prev + current
