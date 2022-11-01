@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct KeyStrokeCounterApp: App {
+    @ObservedObject private var model = KeyStrokeCollectionModel()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(model)
         }
     }
 }

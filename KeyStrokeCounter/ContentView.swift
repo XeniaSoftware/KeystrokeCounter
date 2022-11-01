@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var count = 0
+    @EnvironmentObject var collection: KeyStrokeCollectionModel
     @State var error: String? = nil
     
     var body: some View {
@@ -16,13 +16,9 @@ struct ContentView: View {
             if error != nil {
                 Text(error!)
             }
-            Text(String(self.count))
-            HStack {
-                Button("Reset") {
-                    count = 0
-                }
-            }
+            Text(String(collection.total))
         }
+        .frame(width: 50)
         .padding()
         .onAppear(perform: { () in
             let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String : true]
@@ -31,18 +27,19 @@ struct ContentView: View {
             if !accessEnabled {
                 error = "Access Not Enabled"
             }
-            NSEvent.addGlobalMonitorForEvents(matching: .keyDown) { (event) in
-                guard let _ = event.characters else {
-                    return
-                }
-                self.count += 1
-            }
+
+            NSEvent.addGlobalMonitorForEvents(
+                matching: .keyDown,
+                handler: collection.handle
+            )
         })
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(KeyStrokeCollectionModel())
     }
 }
