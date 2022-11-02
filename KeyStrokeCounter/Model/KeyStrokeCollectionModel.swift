@@ -42,6 +42,15 @@ class KeyStrokeCollectionModel: ObservableObject {
         return model
     }
     
+    func getCount(chars: Array<String>) -> Int {
+        print(chars.debugDescription);
+        return chars.reduce(0, {(prev, current) in
+            let count = getModel().keys[current] ?? 0
+            print(current, count)
+            return prev+count;
+        })
+    }
+    
     func handle(event: NSEvent) {
         let model = getModel()
         model.handle(event: event)
