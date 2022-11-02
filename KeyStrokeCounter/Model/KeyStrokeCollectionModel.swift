@@ -11,7 +11,7 @@ import AppKit
 class KeyStrokeCollectionModel: ObservableObject {
     @Published var keystrokeCollection: Dictionary<String, KeyStrokeModel> = [:]
     
-    init(_ shouldLoad: Bool = true) {
+    init(shouldLoad: Bool = true) {
         if shouldLoad {
             load()
         }
@@ -33,7 +33,6 @@ class KeyStrokeCollectionModel: ObservableObject {
     
     func getModel() -> KeyStrokeModel {
         let todayString = todayAsString()
-        print(todayString)
         let model = keystrokeCollection[todayString] ?? KeyStrokeModel()
         
         if keystrokeCollection[todayString] == nil {
@@ -55,10 +54,12 @@ extension KeyStrokeCollectionModel {
     // MARK: Persistence
     private static var documentsFolder: URL {
         do {
-            return try FileManager.default.url(for: .documentDirectory,
-                                               in: .userDomainMask,
-                                               appropriateFor: nil,
-                                               create: false)
+            return try FileManager.default.url(
+                for: .documentDirectory,
+                in: .userDomainMask,
+                appropriateFor: nil,
+                create: false
+            )
         } catch {
             fatalError("Can't find documents directory.")
         }

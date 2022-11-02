@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3779A13D2910BBE900FA1B3F /* KeyStrokeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779A13C2910BBE900FA1B3F /* KeyStrokeModel.swift */; };
 		3779A13F2910BEB100FA1B3F /* KeyStrokeCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779A13E2910BEB100FA1B3F /* KeyStrokeCollectionModel.swift */; };
+		3779A1432912076200FA1B3F /* SpecialCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779A1422912076200FA1B3F /* SpecialCharacters.swift */; };
 		37977429290F71BF000DFE4F /* KeyStrokeCounterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37977428290F71BF000DFE4F /* KeyStrokeCounterApp.swift */; };
 		3797742B290F71BF000DFE4F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797742A290F71BF000DFE4F /* ContentView.swift */; };
 		3797742D290F71C0000DFE4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3797742C290F71C0000DFE4F /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* Begin PBXFileReference section */
 		3779A13C2910BBE900FA1B3F /* KeyStrokeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStrokeModel.swift; sourceTree = "<group>"; };
 		3779A13E2910BEB100FA1B3F /* KeyStrokeCollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStrokeCollectionModel.swift; sourceTree = "<group>"; };
+		3779A1422912076200FA1B3F /* SpecialCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialCharacters.swift; sourceTree = "<group>"; };
 		37977425290F71BF000DFE4F /* KeyStrokeCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyStrokeCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37977428290F71BF000DFE4F /* KeyStrokeCounterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStrokeCounterApp.swift; sourceTree = "<group>"; };
 		3797742A290F71BF000DFE4F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -42,6 +44,7 @@
 			children = (
 				3779A13C2910BBE900FA1B3F /* KeyStrokeModel.swift */,
 				3779A13E2910BEB100FA1B3F /* KeyStrokeCollectionModel.swift */,
+				3779A1422912076200FA1B3F /* SpecialCharacters.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 				3779A13D2910BBE900FA1B3F /* KeyStrokeModel.swift in Sources */,
 				3797742B290F71BF000DFE4F /* ContentView.swift in Sources */,
 				37977429290F71BF000DFE4F /* KeyStrokeCounterApp.swift in Sources */,
+				3779A1432912076200FA1B3F /* SpecialCharacters.swift in Sources */,
 				3779A13F2910BEB100FA1B3F /* KeyStrokeCollectionModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

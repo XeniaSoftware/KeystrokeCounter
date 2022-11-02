@@ -9,21 +9,86 @@ import Foundation
 import AppKit
 
 class KeyStrokeModel: Codable {
-    var keystrokes: Dictionary<String, Int> = [:]
+    var chars: Dictionary<String, Int> = [:]
+    var symbols: Dictionary<String, Int> = [:]
+    var numbers: Dictionary<String, Int> = [:]
+    var modifiers: Dictionary<String, Int> = [:]
+    
     var total: Int {
-        keystrokes.values.reduce(0, {(prev, current) -> Int in
+        let charCount = chars.values.reduce(0, {(prev, current) -> Int in
             return prev + current
         })
+        let symbolCount = symbols.values.reduce(0, {(prev, current) -> Int in
+            return prev + current
+        })
+        let modifierCount = modifiers.values.reduce(0, {(prev, current) -> Int in
+            return prev + current
+        })
+        return charCount + symbolCount + modifierCount
+    }
+    
+    func add(char: String) {
+        chars[char] = (chars[char] ?? 0) + 1
+    }
+    
+    func add(modifier: String) {
+        modifiers[modifier] = (modifiers[modifier] ?? 0) + 1
+    }
+    
+    func add(symbol: String) {
+        symbols[symbol] = (symbols[symbol] ?? 0) + 1
+    }
+    
+    func add(number: String) {
+        numbers[number] = (numbers[number] ?? 0) + 1
     }
     
     func handle(event: NSEvent) {
-        guard let char = event.characters else {
+        if event.isARepeat {
             return
         }
-        if keystrokes[char] == nil {
-            keystrokes[char] = 0
+        guard let char = event.charactersIgnoringModifiers else {
+            return
         }
+        print("KEYCODE: " + String(event.keyCode))
+        print("CHAR: " + char)
+
         
-        keystrokes[char] = (keystrokes[char] ?? 0) + 1
+        if event.modifierFlags.contains(.command) {
+            add(modifier: "COMMAND")
+        }
+        if event.modifierFlags.contains(.shift) {
+            add(modifier: "SHIFT")
+        }
+        if event.modifierFlags.contains(.option) {
+            add(modifier: "OPTION")
+        }
+        if event.modifierFlags.contains(.capsLock) {
+            add(modifier: "CAPSLOCK")
+        }
+        if event.modifierFlags.contains(.control) {
+            add(modifier: "CONTROL")
+        }
+        var found = false
+        SpecialCharacters.keys.forEach { specialCharacter in
+            if event.keyCode == specialCharacter {
+                add(modifier: SpecialCharacters[specialCharacter]!)
+                found = true
+            }
+        }
+        if found {
+            return
+        }
+        if event.modifierFlags.contains(.function) {
+            add(modifier: "Fn")
+        }
+        if char[char.startIndex].isLetter {
+            add(char: char.lowercased())
+        } else if char[char.startIndex].isNumber {
+            add(number: char)
+        } else {
+            print(char.debugDescription)
+            add(symbol: char)
+        }
     }
 }
