@@ -68,8 +68,8 @@ let Qwerty: KeyboardDefinition = [
         KeyModel(middleLabel: "J"),
         KeyModel(middleLabel: "K"),
         KeyModel(middleLabel: "L"),
-        KeyModel(topLabel: "{", bottomLabel: ";"),
-        KeyModel(topLabel: "{", bottomLabel: "'"),
+        KeyModel(topLabel: ":", bottomLabel: ";"),
+        KeyModel(topLabel: "\"", bottomLabel: "'"),
         KeyModel(middleLabel: "return", scale: 1.8)
     ],
     [
