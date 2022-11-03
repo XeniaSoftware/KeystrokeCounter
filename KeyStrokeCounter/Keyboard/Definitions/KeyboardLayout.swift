@@ -26,6 +26,9 @@ struct KeyboardLayout {
         guard let index = sorted.firstIndex(of: key) else {
             return -1
         }
+        if key.keyCount == 0 {
+            return 0
+        }
         let percentile = Int((Float(index) / Float(sorted.count)) * 100);
 //        print(key.middleLabel,key.keyCount, index, percentile)
         return percentile
