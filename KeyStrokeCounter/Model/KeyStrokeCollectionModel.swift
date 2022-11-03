@@ -9,6 +9,8 @@ import Foundation
 import AppKit
 
 class KeyStrokeCollectionModel: ObservableObject {
+    static let shared = KeyStrokeCollectionModel()
+    
     @Published var keystrokeCollection: Dictionary<String, KeyStrokeModel> = [:]
     
     init(shouldLoad: Bool = true) {

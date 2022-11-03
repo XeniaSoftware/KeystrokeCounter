@@ -8,51 +8,37 @@
 import SwiftUI
 
 struct Key: View {
-    @EnvironmentObject var collection: KeyStrokeCollectionModel
-
     private let baseSize: CGFloat = 50
     
-    public let label: String
-    public let topLabel: String
-    public let bottomLabel: String
-    public let width: CGFloat
-    public let height: CGFloat
+    public let model: KeyModel
     
     @State private var hovered: Bool = false
-    
-    init(label: String = "", topLabel: String = "", bottomLabel: String = "", scale: CGFloat = 1, heightScale: CGFloat = 1) {
-        self.label = label
-        self.topLabel = topLabel
-        self.bottomLabel = bottomLabel
-        self.width = baseSize * scale
-        self.height = baseSize * heightScale
-    }
     
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
-                .frame(width: width, height: height)
+                .frame(width: model.scale * baseSize, height: model.heightScale * baseSize)
                 .overlay {
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(.black, lineWidth: 1)
                 }
             VStack {
                 if hovered {
-                    Text(String(collection.getCount(chars: [self.topLabel, self.bottomLabel, self.label])))
+                    Text(String(model.keyCount))
                         .foregroundColor(.black)
                 } else {
                     Spacer()
-                    Text(topLabel)
+                    Text(model.topLabel)
                         .foregroundColor(.black)
-                    Text(label)
+                    Text(model.middleLabel)
                         .foregroundColor(.black)
-                    Text(bottomLabel)
+                    Text(model.bottomLabel)
                         .foregroundColor(.black)
                     Spacer()
                 }
                 
             }
-            .frame(width: width, height: height)
+            .frame(width: model.scale * baseSize, height: model.heightScale * baseSize)
         }
         .onHover { hovered in
             self.hovered = hovered
@@ -62,6 +48,6 @@ struct Key: View {
 
 struct Key_Previews: PreviewProvider {
     static var previews: some View {
-        Key(topLabel: "`", bottomLabel: "~")
+        Key(model: KeyModel(middleLabel: "esc"))
     }
 }

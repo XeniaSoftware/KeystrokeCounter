@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370AE5632913256C008DA26A /* Qwerty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AE5622913256C008DA26A /* Qwerty.swift */; };
+		370AE565291325CE008DA26A /* KeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AE564291325CE008DA26A /* KeyModel.swift */; };
+		370AE567291331DF008DA26A /* SplitKeyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AE566291331DF008DA26A /* SplitKeyModel.swift */; };
+		370AE56929133348008DA26A /* KeyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370AE56829133348008DA26A /* KeyProtocol.swift */; };
 		3779A13D2910BBE900FA1B3F /* KeyStrokeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779A13C2910BBE900FA1B3F /* KeyStrokeModel.swift */; };
 		3779A13F2910BEB100FA1B3F /* KeyStrokeCollectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779A13E2910BEB100FA1B3F /* KeyStrokeCollectionModel.swift */; };
 		3779A1432912076200FA1B3F /* SpecialCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779A1422912076200FA1B3F /* SpecialCharacters.swift */; };
@@ -19,6 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		370AE5622913256C008DA26A /* Qwerty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Qwerty.swift; sourceTree = "<group>"; };
+		370AE564291325CE008DA26A /* KeyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyModel.swift; sourceTree = "<group>"; };
+		370AE566291331DF008DA26A /* SplitKeyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitKeyModel.swift; sourceTree = "<group>"; };
+		370AE56829133348008DA26A /* KeyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyProtocol.swift; sourceTree = "<group>"; };
 		3779A13C2910BBE900FA1B3F /* KeyStrokeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStrokeModel.swift; sourceTree = "<group>"; };
 		3779A13E2910BEB100FA1B3F /* KeyStrokeCollectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStrokeCollectionModel.swift; sourceTree = "<group>"; };
 		3779A1422912076200FA1B3F /* SpecialCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialCharacters.swift; sourceTree = "<group>"; };
@@ -43,12 +51,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		370AE56129132561008DA26A /* Definitions */ = {
+			isa = PBXGroup;
+			children = (
+				370AE5622913256C008DA26A /* Qwerty.swift */,
+			);
+			path = Definitions;
+			sourceTree = "<group>";
+		};
 		3779A13B2910BBC400FA1B3F /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				3779A13C2910BBE900FA1B3F /* KeyStrokeModel.swift */,
 				3779A13E2910BEB100FA1B3F /* KeyStrokeCollectionModel.swift */,
 				3779A1422912076200FA1B3F /* SpecialCharacters.swift */,
+				370AE564291325CE008DA26A /* KeyModel.swift */,
+				370AE566291331DF008DA26A /* SplitKeyModel.swift */,
+				370AE56829133348008DA26A /* KeyProtocol.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -56,6 +75,7 @@
 		3779A14629121CDF00FA1B3F /* Keyboard */ = {
 			isa = PBXGroup;
 			children = (
+				370AE56129132561008DA26A /* Definitions */,
 				3779A14729121CE900FA1B3F /* Key.swift */,
 				3779A14929121F6500FA1B3F /* Keyboard.swift */,
 			);
@@ -173,9 +193,13 @@
 				3779A14829121CE900FA1B3F /* Key.swift in Sources */,
 				3779A13D2910BBE900FA1B3F /* KeyStrokeModel.swift in Sources */,
 				3779A14A29121F6500FA1B3F /* Keyboard.swift in Sources */,
+				370AE5632913256C008DA26A /* Qwerty.swift in Sources */,
 				3797742B290F71BF000DFE4F /* ContentView.swift in Sources */,
+				370AE56929133348008DA26A /* KeyProtocol.swift in Sources */,
 				37977429290F71BF000DFE4F /* KeyStrokeCounterApp.swift in Sources */,
+				370AE567291331DF008DA26A /* SplitKeyModel.swift in Sources */,
 				3779A1432912076200FA1B3F /* SpecialCharacters.swift in Sources */,
+				370AE565291325CE008DA26A /* KeyModel.swift in Sources */,
 				3779A13F2910BEB100FA1B3F /* KeyStrokeCollectionModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

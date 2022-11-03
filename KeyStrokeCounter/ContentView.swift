@@ -29,7 +29,7 @@ struct ContentView: View {
         VStack {
             Text("Total: " + String(collection.total))
                 .font(.largeTitle)
-            Keyboard()
+            Keyboard(layout: Qwerty)
                 .padding([.bottom, .leading, .trailing])
         }
         .padding(.all)

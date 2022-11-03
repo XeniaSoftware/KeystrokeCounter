@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct KeyStrokeCounterApp: App {
-    @ObservedObject private var model = KeyStrokeCollectionModel()
+    @ObservedObject private var model = KeyStrokeCollectionModel.shared
 
     var body: some Scene {
         WindowGroup {
