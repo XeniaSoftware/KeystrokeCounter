@@ -23,13 +23,9 @@ struct Key: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
+                .stroke(.black, lineWidth: 1)
                 .foregroundColor(color())
                 .frame(width: model.scale * baseSize, height: model.heightScale * baseSize)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(.black, lineWidth: 1)
-                        .foregroundColor(color())
-                }
             VStack {
                 if hovered {
                     Text(String(collection.getCount(chars: [model.topLabel, model.middleLabel, model.bottomLabel])))
