@@ -57,5 +57,6 @@ struct Key: View {
 struct Key_Previews: PreviewProvider {
     static var previews: some View {
         Key(model: KeyModel(middleLabel: "esc"))
+            .environmentObject(KeyStrokeCollectionModel(layout: KeyboardLayout(definition: Qwerty)))
     }
 }
