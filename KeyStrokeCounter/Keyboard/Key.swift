@@ -10,18 +10,14 @@ import SwiftUI
 struct Key: View {
     private let baseSize: CGFloat = 50
     
-    public let layout: KeyboardLayout
     public let model: KeyModel
-    public var percentile: Int
     
     @EnvironmentObject var collection: KeyStrokeCollectionModel
     @State private var hovered: Bool = false
     
     func color() -> Color {
-        var color = Color(.white)
-        let opacity = (Double(collection.layout.getPercentile(key: model)) / 100)
-        color = Color(red: 1, green: 0, blue: 0, opacity: opacity)
-        return color
+        let percentile = collection.layout.getPercentile(key: model)
+        return collection.baseColor.opacity(Double(percentile) / 100)
     }
     
     var body: some View {
@@ -36,7 +32,7 @@ struct Key: View {
                 }
             VStack {
                 if hovered {
-                    Text(String(percentile))
+                    Text(String(collection.getCount(chars: [model.topLabel, model.middleLabel, model.bottomLabel])))
                         .foregroundColor(.black)
                 } else {
                     Spacer()
@@ -60,6 +56,6 @@ struct Key: View {
 
 struct Key_Previews: PreviewProvider {
     static var previews: some View {
-        Key(layout: KeyboardLayout(definition: Qwerty), model: KeyModel(middleLabel: "esc"), percentile: 50)
+        Key(model: KeyModel(middleLabel: "esc"))
     }
 }

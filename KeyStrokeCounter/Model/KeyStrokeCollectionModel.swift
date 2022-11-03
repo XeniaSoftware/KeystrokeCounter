@@ -7,6 +7,7 @@
 
 import Foundation
 import AppKit
+import SwiftUI
 
 class KeyStrokeCollectionModel: ObservableObject {
     static let shared = KeyStrokeCollectionModel(layout: KeyboardLayout(definition: Qwerty))
@@ -18,12 +19,14 @@ class KeyStrokeCollectionModel: ObservableObject {
     }
     
     @Published var layout: KeyboardLayout
+    @Published var baseColor: Color
     
     private var lastSorted: Date
     
     init(layout: KeyboardLayout, shouldLoad: Bool = true) {
         self.layout = layout
         self.lastSorted = Date()
+        self.baseColor = .red
         if shouldLoad {
             load()
         }

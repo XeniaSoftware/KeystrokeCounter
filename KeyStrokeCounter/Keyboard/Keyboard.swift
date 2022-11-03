@@ -18,12 +18,12 @@ struct Keyboard: View {
                         if key.isSplit {
                             VStack(spacing: 0) {
                                 ForEach(key.splitKeys) { splitKey in
-                                    Key(layout: collection.layout, model: splitKey, percentile: collection.layout.getPercentile(key: splitKey))
+                                    Key(model: splitKey)
                                 }
                             }
                         }
                         else {
-                            Key(layout: collection.layout, model: key, percentile: collection.layout.getPercentile(key: key))
+                            Key(model: key)
                         }
                     }
                 }

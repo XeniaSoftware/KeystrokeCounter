@@ -27,6 +27,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
+            ColorPicker(selection: $collection.baseColor, supportsOpacity: false) { return Text("Color")}
             Text("Total: " + String(collection.total))
                 .font(.largeTitle)
             Keyboard()
