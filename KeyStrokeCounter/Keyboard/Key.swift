@@ -19,7 +19,7 @@ struct Key: View {
     
     func color() -> Color {
         var color = Color(.white)
-        let opacity = (Double(percentile) / 100)
+        let opacity = (Double(collection.layout.getPercentile(key: model)) / 100)
         color = Color(red: 1, green: 0, blue: 0, opacity: opacity)
         return color
     }

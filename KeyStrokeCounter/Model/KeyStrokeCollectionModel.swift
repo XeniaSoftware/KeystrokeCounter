@@ -9,12 +9,21 @@ import Foundation
 import AppKit
 
 class KeyStrokeCollectionModel: ObservableObject {
-    static let shared = KeyStrokeCollectionModel()
+    static let shared = KeyStrokeCollectionModel(layout: KeyboardLayout(definition: Qwerty))
     
-    @Published var keystrokeCollection: Dictionary<String, KeyStrokeModel> = [:]
+    @Published var keystrokeCollection: Dictionary<String, KeyStrokeModel> = [:] {
+        didSet {
+            layout.sort()
+        }
+    }
     
+    @Published var layout: KeyboardLayout
     
-    init(shouldLoad: Bool = true) {
+    private var lastSorted: Date
+    
+    init(layout: KeyboardLayout, shouldLoad: Bool = true) {
+        self.layout = layout
+        self.lastSorted = Date()
         if shouldLoad {
             load()
         }
@@ -57,6 +66,12 @@ class KeyStrokeCollectionModel: ObservableObject {
         model.handle(event: event)
         objectWillChange.send()
         save()
+        let distance = Date().timeIntervalSince(lastSorted)
+        print("TIME SINCE", distance)
+        if distance > Double(10) {
+            layout.sort()
+            self.lastSorted = Date()
+        }
     }
 }
 

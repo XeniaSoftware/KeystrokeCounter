@@ -29,7 +29,7 @@ struct ContentView: View {
         VStack {
             Text("Total: " + String(collection.total))
                 .font(.largeTitle)
-            Keyboard(layout: KeyboardLayout(definition: Qwerty))
+            Keyboard()
                 .padding([.bottom, .leading, .trailing])
         }
         .padding(.all)
@@ -41,6 +41,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(KeyStrokeCollectionModel(shouldLoad: false))
+            .environmentObject(KeyStrokeCollectionModel(layout: KeyboardLayout(definition: Qwerty), shouldLoad: false))
     }
 }
