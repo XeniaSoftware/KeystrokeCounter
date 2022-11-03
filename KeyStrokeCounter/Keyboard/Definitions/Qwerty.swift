@@ -7,7 +7,6 @@
 
 import Foundation
 
-typealias KeyboardDefinition = Array<Array<KeyModel>>
  
 let Qwerty: KeyboardDefinition = [
     [

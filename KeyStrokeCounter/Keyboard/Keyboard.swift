@@ -8,33 +8,33 @@
 import SwiftUI
 
 struct Keyboard: View {
-    @State var layout: KeyboardDefinition
+    @EnvironmentObject var collection: KeyStrokeCollectionModel
+    var layout: KeyboardLayout
 
     var body: some View {
         VStack {
-            ForEach(layout, id: \.self) { row in
+            ForEach(layout.definition, id: \.self) { row in
                 HStack {
                     ForEach(row, id: \.self) { key in
                         if key.isSplit {
                             VStack(spacing: 0) {
                                 ForEach(key.splitKeys) { splitKey in
-                                    Key(model: splitKey)
+                                    Key(layout: layout, model: splitKey, percentile: layout.getPercentile(key: splitKey))
                                 }
                             }
                         }
                         else {
-                            Key(model: key)
+                            Key(layout: layout, model: key, percentile: layout.getPercentile(key: key))
                         }
                     }
                 }
             }
         }
-
     }
 }
 
 struct Keyboard_Previews: PreviewProvider {
     static var previews: some View {
-        Keyboard(layout: Qwerty)
+        Keyboard(layout: KeyboardLayout(definition: Qwerty))
     }
 }

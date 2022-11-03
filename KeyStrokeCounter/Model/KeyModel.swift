@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct KeyModel: Identifiable, Hashable, KeyProtocol {
+struct KeyModel: Identifiable, Hashable, Comparable {
+    static func < (lhs: KeyModel, rhs: KeyModel) -> Bool {
+        return lhs.keyCount < rhs.keyCount
+    }
+    
     public let topLabel: String
     public let bottomLabel: String
     public let middleLabel: String

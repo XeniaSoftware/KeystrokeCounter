@@ -13,6 +13,7 @@ class KeyStrokeCollectionModel: ObservableObject {
     
     @Published var keystrokeCollection: Dictionary<String, KeyStrokeModel> = [:]
     
+    
     init(shouldLoad: Bool = true) {
         if shouldLoad {
             load()
@@ -45,10 +46,8 @@ class KeyStrokeCollectionModel: ObservableObject {
     }
     
     func getCount(chars: Array<String>) -> Int {
-        print(chars.debugDescription);
         return chars.reduce(0, {(prev, current) in
             let count = getModel().keys[current] ?? 0
-            print(current, count)
             return prev+count;
         })
     }
@@ -90,6 +89,7 @@ extension KeyStrokeCollectionModel {
             }
             DispatchQueue.main.async {
                 self?.keystrokeCollection = collections
+                print("LOADED")
             }
         }
     }
