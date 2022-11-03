@@ -18,11 +18,15 @@ struct KeyboardLayout {
     }
     
     mutating func sort() {
-        self.sorted = Array(definition.joined()).sorted()
+        self.sorted = definition.joined().reduce([], {(prev, current) in
+            if current.isSplit {
+                return prev + current.splitKeys
+            }
+            return prev + [current]
+        }).sorted()
     }
     
     public func getPercentile(key: KeyModel) -> Int {
-//        print("GETTING PERCENTILE", key.middleLabel, key.bottomLabel, self.sorted.debugDescription)
         guard let index = sorted.firstIndex(of: key) else {
             return -1
         }
@@ -30,7 +34,6 @@ struct KeyboardLayout {
             return 0
         }
         let percentile = Int((Float(index) / Float(sorted.count)) * 100);
-//        print(key.middleLabel,key.keyCount, index, percentile)
         return percentile
     }
 }
