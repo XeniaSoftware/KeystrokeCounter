@@ -7,11 +7,26 @@
 
 import Foundation
 import AppKit
+import SwiftUI
 
 class KeyStrokeCollectionModel: ObservableObject {
-    @Published var keystrokeCollection: Dictionary<String, KeyStrokeModel> = [:]
+    static let shared = KeyStrokeCollectionModel(layout: KeyboardLayout(definition: Qwerty))
     
-    init(shouldLoad: Bool = true) {
+    @Published var keystrokeCollection: Dictionary<String, KeyStrokeModel> = [:] {
+        didSet {
+            layout.sort()
+        }
+    }
+    
+    @Published var layout: KeyboardLayout
+    @Published var baseColor: Color
+    
+    private var lastSorted: Date
+    
+    init(layout: KeyboardLayout, shouldLoad: Bool = true) {
+        self.layout = layout
+        self.lastSorted = Date()
+        self.baseColor = .red
         if shouldLoad {
             load()
         }
@@ -42,11 +57,24 @@ class KeyStrokeCollectionModel: ObservableObject {
         return model
     }
     
+    func getCount(chars: Array<String>) -> Int {
+        return chars.reduce(0, {(prev, current) in
+            let count = getModel().keys[current] ?? 0
+            return prev+count;
+        })
+    }
+    
     func handle(event: NSEvent) {
         let model = getModel()
         model.handle(event: event)
         objectWillChange.send()
         save()
+        let distance = Date().timeIntervalSince(lastSorted)
+        print("TIME SINCE", distance)
+        if distance > Double(10) {
+            layout.sort()
+            self.lastSorted = Date()
+        }
     }
 }
 
@@ -79,6 +107,7 @@ extension KeyStrokeCollectionModel {
             }
             DispatchQueue.main.async {
                 self?.keystrokeCollection = collections
+                print("LOADED")
             }
         }
     }
