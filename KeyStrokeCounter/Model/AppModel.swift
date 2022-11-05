@@ -25,7 +25,7 @@ class AppModel: ObservableObject, Codable {
     
     init(keystrokeCollection: KeystrokeCollection = [:],
         keyboardDefinition: KeyboardDefinition = Qwerty,
-        color: Color = Color(red: 1, green: 0, blue: 0)
+        color: Color = Color(red: 1, green: 1, blue: 1)
     ) {
         self.keystrokeCollection = keystrokeCollection
         self.keyboardDefinition = keyboardDefinition
