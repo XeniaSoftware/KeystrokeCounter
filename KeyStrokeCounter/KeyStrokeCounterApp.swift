@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct KeyStrokeCounterApp: App {
+    @Environment(\.scenePhase) private var scenePhase
     @ObservedObject private var appController = AppController()
 
     var body: some Scene {
@@ -16,5 +17,12 @@ struct KeyStrokeCounterApp: App {
             ContentView()
                 .environmentObject(appController)
         }
+        .onChange(of: scenePhase, perform: { phase in
+            print("PHASE CHANGE")
+            if phase == .background {
+                print("SAVING")
+                appController.save()
+            }
+        })
     }
 }

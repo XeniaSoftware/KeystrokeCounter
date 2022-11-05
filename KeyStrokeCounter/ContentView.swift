@@ -36,7 +36,6 @@ struct ContentView: View {
         .padding(.all)
         .onAppear(perform: register)
     }
-
 }
 
 struct ContentView_Previews: PreviewProvider {

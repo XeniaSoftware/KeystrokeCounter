@@ -96,10 +96,9 @@ class AppModel: ObservableObject, Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(keystrokeCollection, forKey: .keystrokeCollection)
         try container.encode(keyboardDefinition, forKey: .keyboardDefinition)
-        let rgb = color.rgb()
-        try container.encode(rgb.red, forKey: .red)
-        try container.encode(rgb.green, forKey: .green)
-        try container.encode(rgb.blue, forKey: .blue)
+        let rgb = color.components
+        try container.encode(rgb?[0] ?? 1, forKey: .red)
+        try container.encode(rgb?[1] ?? 1, forKey: .green)
+        try container.encode(rgb?[2] ?? 1, forKey: .blue)
     }
-
 }
