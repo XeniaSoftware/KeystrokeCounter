@@ -10,15 +10,11 @@ import AppKit
 
 class KeyStrokeModel: Codable {
     var keys: Dictionary<String, Int> = [:]
-    
-    var total: Int {
-        return keys.values.reduce(0, {(prev, current) -> Int in
-            return prev + current
-        })
-    }
+    var total: Int = 0
     
     func add(_ char: String) {
         keys[char] = (keys[char] ?? 0) + 1
+        total += 1
     }
     
     func handle(event: NSEvent) {

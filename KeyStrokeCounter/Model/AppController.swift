@@ -9,12 +9,14 @@ import Foundation
 import AppKit
     
 class AppController: ObservableObject {
-    @Published public var appModel: AppModel = AppModel()
+    @Published public var appModel: AppModel!
     
-    init(shouldLoad: Bool = true) {
-        if shouldLoad {
-            load()
-        }
+    init() {
+        load()
+    }
+    
+    init(appModel: AppModel) {
+        self.appModel = appModel
     }
     
     func handle(event: NSEvent) {
@@ -22,10 +24,7 @@ class AppController: ObservableObject {
         model.handle(event: event)
         objectWillChange.send()
         save()
-        let distance = Date().timeIntervalSince(appModel.lastSorted)
-        if distance > Double(10) {
-            appModel.sort()
-        }
+        appModel.sort()
     }
 }
 
@@ -51,6 +50,7 @@ extension AppController {
     func load() {
         DispatchQueue.global(qos: .background).async { [weak self] in
             guard let data = try? Data(contentsOf: Self.fileURL) else {
+                self?.appModel = AppModel()
                 return
             }
             guard let appModel = try? JSONDecoder().decode(AppModel.self, from: data) else {
@@ -62,7 +62,7 @@ extension AppController {
             }
         }
     }
-    
+   
     func save() {
         DispatchQueue.global(qos: .background).async { [weak self] in
             guard let appModel = self?.appModel else { fatalError("Self out of scope") }

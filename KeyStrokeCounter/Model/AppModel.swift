@@ -52,6 +52,11 @@ class AppModel: ObservableObject, Codable {
     }
     
     func sort() {
+        let now = Date()
+        let distance = now.timeIntervalSince(lastSorted)
+        if distance < Double(1) {
+            return
+        }
         self.sorted = keyboardDefinition.joined().reduce([], {(prev, current) in
             if current.isSplit {
                 return prev + current.splitKeys
@@ -60,6 +65,7 @@ class AppModel: ObservableObject, Codable {
         }).sorted {
             getCount(for: $0) < getCount(for: $1)
         }
+        self.lastSorted = Date()
     }
     
     func getPercentile(key: KeyModel) -> Int {

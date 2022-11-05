@@ -14,7 +14,7 @@ struct KeyStrokeCounterApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
                 .environmentObject(appController)
         }
         .onChange(of: scenePhase, perform: { phase in
