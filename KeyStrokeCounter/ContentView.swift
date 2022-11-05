@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var collection: KeyStrokeCollectionModel
+    @EnvironmentObject var appController: AppController
     @State var error: String? = nil
     
     func register() {
@@ -21,15 +21,15 @@ struct ContentView: View {
 
         NSEvent.addGlobalMonitorForEvents(
             matching: .keyDown,
-            handler: collection.handle
+            handler: appController.handle
         )
     }
     
     var body: some View {
         VStack {
-            Text("Total: " + String(collection.total))
+            Text("Total: " + String(appController.appModel.total))
                 .font(.largeTitle)
-            ColorPicker(selection: $collection.baseColor, supportsOpacity: false) { return Text("Color")}
+            ColorPicker(selection: $appController.appModel.color, supportsOpacity: false) { return Text("Color")}
             Keyboard()
                 .padding([.bottom, .leading, .trailing])
         }
@@ -42,6 +42,5 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(KeyStrokeCollectionModel(layout: KeyboardLayout(definition: Qwerty), shouldLoad: false))
     }
 }

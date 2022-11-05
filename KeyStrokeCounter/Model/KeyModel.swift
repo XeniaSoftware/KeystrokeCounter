@@ -7,11 +7,7 @@
 
 import Foundation
 
-struct KeyModel: Identifiable, Hashable, Comparable {
-    static func < (lhs: KeyModel, rhs: KeyModel) -> Bool {
-        return lhs.keyCount < rhs.keyCount
-    }
-    
+struct KeyModel: Identifiable, Hashable, Codable {
     public let topLabel: String
     public let bottomLabel: String
     public let middleLabel: String
@@ -22,10 +18,6 @@ struct KeyModel: Identifiable, Hashable, Comparable {
     
     public var id: String {
         return topLabel + middleLabel + bottomLabel
-    }
-    
-    public var keyCount: Int {
-        return KeyStrokeCollectionModel.shared.getCount(chars: [topLabel, middleLabel, bottomLabel])
     }
     
     init(topLabel: String, bottomLabel: String, scale: CGFloat = 1) {

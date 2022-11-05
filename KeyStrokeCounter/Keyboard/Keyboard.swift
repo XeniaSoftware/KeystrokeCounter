@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct Keyboard: View {
-    @EnvironmentObject var collection: KeyStrokeCollectionModel
+    @EnvironmentObject var appController: AppController
 
     var body: some View {
         VStack {
-            ForEach(collection.layout.definition, id: \.self) { row in
+            ForEach(appController.appModel.keyboardDefinition, id: \.self) { row in
                 HStack {
                     ForEach(row, id: \.self) { key in
                         if key.isSplit {
@@ -35,6 +35,5 @@ struct Keyboard: View {
 struct Keyboard_Previews: PreviewProvider {
     static var previews: some View {
         Keyboard()
-            .environmentObject(KeyStrokeCollectionModel(layout: KeyboardLayout(definition: Qwerty)))
     }
 }

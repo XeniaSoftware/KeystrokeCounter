@@ -12,12 +12,12 @@ struct Key: View {
     
     public let model: KeyModel
     
-    @EnvironmentObject var collection: KeyStrokeCollectionModel
+    @EnvironmentObject var appController: AppController
     @State private var hovered: Bool = false
     
     func color() -> Color {
-        let percentile = collection.layout.getPercentile(key: model)
-        return collection.baseColor.opacity(Double(percentile) / 100)
+        let percentile = appController.appModel.getPercentile(key: model)
+        return appController.appModel.color.opacity(Double(percentile) / 100)
     }
     
     var body: some View {
@@ -28,7 +28,7 @@ struct Key: View {
                 .frame(width: model.scale * baseSize, height: model.heightScale * baseSize)
             VStack {
                 if hovered {
-                    Text(String(collection.getCount(chars: [model.topLabel, model.middleLabel, model.bottomLabel])))
+                    Text(String(appController.appModel.getCount(for: model)))
                         .foregroundColor(.black)
                 } else {
                     Spacer()
@@ -53,6 +53,5 @@ struct Key: View {
 struct Key_Previews: PreviewProvider {
     static var previews: some View {
         Key(model: KeyModel(middleLabel: "esc"))
-            .environmentObject(KeyStrokeCollectionModel(layout: KeyboardLayout(definition: Qwerty)))
     }
 }
