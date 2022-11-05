@@ -35,9 +35,11 @@ struct ContentView: View {
                 Picker("Layout", selection: $appController.appModel.keyboardDefinition) {
                     Text("Qwerty").tag(Qwerty)
                     Text("Dvorak").tag(Dvorak)
+                    Text("Colemak").tag(Colemak)
                 }
                 .pickerStyle(.segmented)
-                .frame(width: 100)
+                .frame(width: 150)
+                .padding(.trailing)
             }
             .padding([.leading, .trailing])
             Keyboard()
@@ -51,5 +53,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(AppController(appModel: AppModel()))
     }
 }
