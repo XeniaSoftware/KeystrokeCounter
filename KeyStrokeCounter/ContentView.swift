@@ -29,7 +29,17 @@ struct ContentView: View {
         VStack {
             Text("Total: " + String(appController.appModel.total))
                 .font(.largeTitle)
-            ColorPicker(selection: $appController.appModel.color, supportsOpacity: false) { return Text("Color")}
+            HStack {
+                ColorPicker(selection: $appController.appModel.color, supportsOpacity: false) { return Text("Color")}
+                Spacer()
+                Picker("Layout", selection: $appController.appModel.keyboardDefinition) {
+                    Text("Qwerty").tag(Qwerty)
+                    Text("Dvorak").tag(Dvorak)
+                }
+                .pickerStyle(.segmented)
+                .frame(width: 100)
+            }
+            .padding([.leading, .trailing])
             Keyboard()
                 .padding([.bottom, .leading, .trailing])
         }
