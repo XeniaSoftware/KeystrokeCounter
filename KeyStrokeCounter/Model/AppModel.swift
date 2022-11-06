@@ -58,17 +58,16 @@ class AppModel: ObservableObject, Codable {
             return
         }
         
-        let keys = keyboardDefinition.reduce([] as [KeyModel], {(prev, current) in
-            var accumulator = prev
+        let keys = keyboardDefinition.reduce(into: [] as [KeyModel]) { prev, current in
             for keymodel in current {
                 if keymodel.isSplit {
-                    accumulator.append(contentsOf: keymodel.splitKeys)
+                    prev = prev + keymodel.splitKeys
+                } else {
+                    prev = prev + [keymodel]
                 }
-                
-                accumulator.append(keymodel)
             }
-            return accumulator
-        })
+        }
+        
         let counts = keys.reduce(into: [:] as [KeyModel: Int]) { $0[$1] = getCount(for:$1)}
         
         self.sorted = keys.sorted {
