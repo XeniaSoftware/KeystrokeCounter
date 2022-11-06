@@ -17,6 +17,8 @@
 		376CF13A2916BD74003A91C0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376CF1392916BD74003A91C0 /* MainView.swift */; };
 		376CF13C2916BFE4003A91C0 /* Dvorak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376CF13B2916BFE4003A91C0 /* Dvorak.swift */; };
 		376CF13E2916C72D003A91C0 /* Colemak.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376CF13D2916C72D003A91C0 /* Colemak.swift */; };
+		376CF1412917656A003A91C0 /* FloatingWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376CF1402917656A003A91C0 /* FloatingWindow.swift */; };
+		376CF1482918324A003A91C0 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376CF1472918324A003A91C0 /* View.swift */; };
 		3779A13D2910BBE900FA1B3F /* KeyStrokeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779A13C2910BBE900FA1B3F /* KeyStrokeModel.swift */; };
 		3779A1432912076200FA1B3F /* SpecialCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779A1422912076200FA1B3F /* SpecialCharacters.swift */; };
 		3779A14829121CE900FA1B3F /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779A14729121CE900FA1B3F /* Key.swift */; };
@@ -38,6 +40,9 @@
 		376CF1392916BD74003A91C0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		376CF13B2916BFE4003A91C0 /* Dvorak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dvorak.swift; sourceTree = "<group>"; };
 		376CF13D2916C72D003A91C0 /* Colemak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colemak.swift; sourceTree = "<group>"; };
+		376CF1402917656A003A91C0 /* FloatingWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingWindow.swift; sourceTree = "<group>"; };
+		376CF1422917740A003A91C0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		376CF1472918324A003A91C0 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		3779A13C2910BBE900FA1B3F /* KeyStrokeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStrokeModel.swift; sourceTree = "<group>"; };
 		3779A1422912076200FA1B3F /* SpecialCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialCharacters.swift; sourceTree = "<group>"; };
 		3779A14729121CE900FA1B3F /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
@@ -76,8 +81,17 @@
 			children = (
 				376CF1312916398C003A91C0 /* Color.swift */,
 				376CF13329163A98003A91C0 /* Date.swift */,
+				376CF1472918324A003A91C0 /* View.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		376CF13F29176558003A91C0 /* FloatingWindow */ = {
+			isa = PBXGroup;
+			children = (
+				376CF1402917656A003A91C0 /* FloatingWindow.swift */,
+			);
+			path = FloatingWindow;
 			sourceTree = "<group>";
 		};
 		3779A13B2910BBC400FA1B3F /* Model */ = {
@@ -121,6 +135,8 @@
 		37977427290F71BF000DFE4F /* KeyStrokeCounter */ = {
 			isa = PBXGroup;
 			children = (
+				376CF1422917740A003A91C0 /* Info.plist */,
+				376CF13F29176558003A91C0 /* FloatingWindow */,
 				376CF13029163982003A91C0 /* Extensions */,
 				3779A14629121CDF00FA1B3F /* Keyboard */,
 				3779A13B2910BBC400FA1B3F /* Model */,
@@ -221,11 +237,13 @@
 				376CF13C2916BFE4003A91C0 /* Dvorak.swift in Sources */,
 				376CF1322916398C003A91C0 /* Color.swift in Sources */,
 				370AE5632913256C008DA26A /* Qwerty.swift in Sources */,
+				376CF1412917656A003A91C0 /* FloatingWindow.swift in Sources */,
 				3797742B290F71BF000DFE4F /* ContentView.swift in Sources */,
 				37977429290F71BF000DFE4F /* KeyStrokeCounterApp.swift in Sources */,
 				376CF13429163A98003A91C0 /* Date.swift in Sources */,
 				3779A1432912076200FA1B3F /* SpecialCharacters.swift in Sources */,
 				370AE565291325CE008DA26A /* KeyModel.swift in Sources */,
+				376CF1482918324A003A91C0 /* View.swift in Sources */,
 				376CF1382916BCD9003A91C0 /* LoadingView.swift in Sources */,
 				376CF13E2916C72D003A91C0 /* Colemak.swift in Sources */,
 				376CF12F291638C6003A91C0 /* AppController.swift in Sources */,
@@ -363,6 +381,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KeyStrokeCounter/Info.plist;
 				INFOPLIST_KEY_LSUIElement = NO;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -392,6 +411,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = KeyStrokeCounter/Info.plist;
 				INFOPLIST_KEY_LSUIElement = NO;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (

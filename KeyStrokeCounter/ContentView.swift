@@ -8,10 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.openURL) var openURL
     @EnvironmentObject var appController: AppController
     @State var error: String? = nil
     
     func register() {
+        var foundFloating = false
+        for window in NSApplication.shared.windows {
+            if window.title == "Floating" {
+                foundFloating = true
+            }
+            if window.title == "Keyboard" {
+                window.level = .normal
+                window.standardWindowButton(.zoomButton)?.isHidden = true
+                window.standardWindowButton(.closeButton)?.isHidden = false
+                window.standardWindowButton(.miniaturizeButton)?.isHidden = false
+            }
+        }
+        
+        if foundFloating == false {
+            if let url = URL(string: "keystroke://viewer") {
+                 openURL(url)
+            }
+        }
+
         let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String : true]
         let accessEnabled = AXIsProcessTrustedWithOptions(options)
 

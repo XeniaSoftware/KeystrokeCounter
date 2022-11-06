@@ -13,10 +13,19 @@ struct KeyStrokeCounterApp: App {
     @ObservedObject private var appController = AppController()
 
     var body: some Scene {
-        WindowGroup {
+        WindowGroup("Keyboard") {
             MainView()
                 .environmentObject(appController)
         }
         .windowStyle(.hiddenTitleBar)
+
+        WindowGroup("Floating") {
+                FloatingWindow()
+                    .environmentObject(appController)
+        }
+        .windowStyle(HiddenTitleBarWindowStyle())
+        .windowToolbarStyle(.unifiedCompact(showsTitle: false))
+//        .windowStyle(.hiddenTitleBar)
+        .handlesExternalEvents(matching: Set(arrayLiteral: "*"))
     }
 }

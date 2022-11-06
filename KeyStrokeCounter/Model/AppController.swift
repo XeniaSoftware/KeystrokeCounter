@@ -50,7 +50,9 @@ extension AppController {
     func load() {
         DispatchQueue.global(qos: .background).async { [weak self] in
             guard let data = try? Data(contentsOf: Self.fileURL) else {
-                self?.appModel = AppModel()
+                DispatchQueue.main.async {
+                    self?.appModel = AppModel()
+                }
                 return
             }
             guard let appModel = try? JSONDecoder().decode(AppModel.self, from: data) else {
