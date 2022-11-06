@@ -57,14 +57,24 @@ class AppModel: ObservableObject, Codable {
         if distance < Double(1) {
             return
         }
-        self.sorted = keyboardDefinition.joined().reduce([], {(prev, current) in
-            if current.isSplit {
-                return prev + current.splitKeys
+        
+        let keys = keyboardDefinition.reduce([] as [KeyModel], {(prev, current) in
+            var accumulator = prev
+            for keymodel in current {
+                if keymodel.isSplit {
+                    accumulator.append(contentsOf: keymodel.splitKeys)
+                }
+                
+                accumulator.append(keymodel)
             }
-            return prev + [current]
-        }).sorted {
-            getCount(for: $0) < getCount(for: $1)
+            return accumulator
+        })
+        let counts = keys.reduce(into: [:] as [KeyModel: Int]) { $0[$1] = getCount(for:$1)}
+        
+        self.sorted = keys.sorted {
+            counts[$0]! < counts[$1]!
         }
+
         self.lastSorted = Date()
     }
     
