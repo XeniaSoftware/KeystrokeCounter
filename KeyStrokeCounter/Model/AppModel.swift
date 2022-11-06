@@ -53,10 +53,6 @@ class AppModel: ObservableObject, Codable {
     
     func sort() {
         let now = Date()
-        let distance = now.timeIntervalSince(lastSorted)
-        if distance < Double(1) {
-            return
-        }
         
         let keys = keyboardDefinition.reduce(into: [] as [KeyModel]) { prev, current in
             for keymodel in current {
@@ -68,8 +64,6 @@ class AppModel: ObservableObject, Codable {
             }
         }
         let counts = keys.map { getCount(for: $0) }
-        
-//        let counts = keys.reduce(into: [:] as [KeyModel : Int]) { $0[$1] = getCount(for:$1)}
         
         self.sorted = Array(Set(counts)).sorted()
         
