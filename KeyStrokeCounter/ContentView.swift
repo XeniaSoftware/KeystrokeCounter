@@ -41,10 +41,9 @@ struct ContentView: View {
                 .frame(width: 150)
                 .padding(.trailing)
             }
-            .padding([.leading, .trailing])
             Keyboard()
-                .padding([.bottom, .leading, .trailing])
         }
+        .frame(width: 820, height: 405)
         .padding(.all)
         .onAppear(perform: register)
     }
