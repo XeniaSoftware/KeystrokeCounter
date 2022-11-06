@@ -24,7 +24,12 @@ struct Key: View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
                 .strokeBorder(.black, lineWidth: 1)
-                .background(RoundedRectangle(cornerRadius: 10).fill(color()))
+                .background(
+                    RoundedRectangle(cornerRadius: 10).fill(color())
+                        .background(
+                            RoundedRectangle(cornerRadius: 10).fill(Color(red: 0.22, green: 0.22, blue: 0.22))
+                        )
+                )
                 .frame(width: model.scale * baseSize, height: model.heightScale * baseSize)
             VStack {
                 if hovered {
