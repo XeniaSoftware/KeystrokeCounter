@@ -17,12 +17,5 @@ struct KeyStrokeCounterApp: App {
             MainView()
                 .environmentObject(appController)
         }
-        .onChange(of: scenePhase, perform: { phase in
-            print("PHASE CHANGE")
-            if phase == .background {
-                print("SAVING")
-                appController.save()
-            }
-        })
     }
 }
