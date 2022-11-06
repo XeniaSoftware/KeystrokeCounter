@@ -16,7 +16,7 @@ class AppModel: ObservableObject, Codable {
     @Published var keyboardDefinition: KeyboardDefinition
     @Published var color: Color
     
-    var sorted: [KeyModel]
+    var sorted: [Int]
     var lastSorted: Date
     
     var total: Int {
@@ -67,18 +67,19 @@ class AppModel: ObservableObject, Codable {
                 }
             }
         }
+        let counts = keys.map { getCount(for: $0) }
         
-        let counts = keys.reduce(into: [:] as [KeyModel: Int]) { $0[$1] = getCount(for:$1)}
+//        let counts = keys.reduce(into: [:] as [KeyModel : Int]) { $0[$1] = getCount(for:$1)}
         
-        self.sorted = keys.sorted {
-            counts[$0]! < counts[$1]!
-        }
+        self.sorted = Array(Set(counts)).sorted()
+        
+        print("SORTING TOOK", Date().timeIntervalSince(now), "SECONDS")
 
         self.lastSorted = Date()
     }
     
     func getPercentile(key: KeyModel) -> Int {
-        guard let index = sorted.firstIndex(of: key) else {
+        guard let index = sorted.firstIndex(of: getCount(for: key)) else {
             return -1
         }
         if getCount(for: key) == 0 {
