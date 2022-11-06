@@ -30,7 +30,7 @@ struct ContentView: View {
             Text("Total: " + String(appController.appModel.total))
                 .font(.largeTitle)
             HStack {
-                ColorPicker(selection: $appController.appModel.color, supportsOpacity: false) { return Text("Color")}
+                ColorPicker(selection: $appController.appModel.color, supportsOpacity: false) { EmptyView() }
                 Spacer()
                 Picker("Layout", selection: $appController.appModel.keyboardDefinition) {
                     Text("Qwerty").tag(Qwerty)
