@@ -17,5 +17,6 @@ struct KeyStrokeCounterApp: App {
             MainView()
                 .environmentObject(appController)
         }
+        .windowStyle(.hiddenTitleBar)
     }
 }
