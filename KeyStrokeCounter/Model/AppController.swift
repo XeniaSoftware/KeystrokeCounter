@@ -10,6 +10,7 @@ import AppKit
     
 class AppController: ObservableObject {
     @Published public var appModel: AppModel!
+    private var windows: [Windows: NSWindow] = [:]
     
     init() {
         load()
@@ -25,6 +26,62 @@ class AppController: ObservableObject {
         objectWillChange.send()
         save()
         appModel.sort()
+    }
+    
+    func addWindow(for window: Windows, reference: NSWindow) {
+        // If we have a different window, close it.
+        if let oldWindow = self.windows[window],
+           oldWindow.identifier == reference.identifier {
+            oldWindow.close()
+        }
+        windows[window] = reference
+    }
+    
+    private func postLoad() {
+        self.registerEventListener()
+        self.showFloatingWindow()
+    }
+    
+    private func registerEventListener() {
+        let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String : true]
+        let accessEnabled = AXIsProcessTrustedWithOptions(options)
+        print("ACCESS?", accessEnabled)
+
+        NSEvent.addGlobalMonitorForEvents(
+            matching: .keyDown,
+            handler: handle
+        )
+    }
+    
+    private func showFloatingWindow() {
+        if appModel?.showFloatingWindow ?? false == false {
+            return
+        }
+        if let window = windows[.Floating] {
+            window.orderFrontRegardless()
+        } else {
+            if let url = URL(string: "keystroke://" + Windows.Floating.rawValue) {
+                NSWorkspace.shared.open(url)
+            }
+        }
+    }
+    
+    func showHeatmap() {
+        if let window = windows[.Heatmap] {
+            window.makeKeyAndOrderFront(self)
+        } else {
+            if let url = URL(string: "keystroke://" + Windows.Heatmap.rawValue) {
+                NSWorkspace.shared.open(url)
+            }
+        }
+    }
+    
+    func showSettings() {
+        if let window = windows[.Settings] {
+            window.makeKeyAndOrderFront(self)
+        } else {
+            NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
+        }
     }
 }
 
@@ -60,6 +117,7 @@ extension AppController {
             }
             DispatchQueue.main.async {
                 self?.appModel = appModel
+                self?.postLoad()
                 print("LOADED")
             }
         }

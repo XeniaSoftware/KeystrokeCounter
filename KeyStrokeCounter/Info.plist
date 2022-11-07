@@ -15,5 +15,7 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSSupportsSuddenTermination</key>
+	<true/>
 </dict>
 </plist>

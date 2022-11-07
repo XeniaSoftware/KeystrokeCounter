@@ -9,27 +9,40 @@ import Foundation
 import AppKit
 import SwiftUI
 
-extension View {
-    func withHostingWindow(_ callback: @escaping (NSWindow?) -> Void) -> some View {
-        self.background(HostingWindowFinder(callback: callback))
-    }
-}
 
-struct HostingWindowFinder: NSViewRepresentable {
-    typealias NSViewType = NSView
-    
-    var callback: (NSWindow?) -> ()
-    
+struct WindowAccessor: NSViewRepresentable {
+    @Binding var window: NSWindow?
     
     func makeNSView(context: Context) -> NSView {
         let view = NSView()
-
-        DispatchQueue.main.async { [weak view] in
-            self.callback(view?.window)
+        DispatchQueue.main.async {
+            self.window = view.window
         }
         return view
     }
     
-    func updateNSView(_ nsView: NSView, context: Context) {
+    func updateNSView(_ nsView: NSView, context: Context) {}
+}
+
+public extension View {
+    // Get rect of a view in specified coordinate space, by default in global, so by default it
+    // provides view's frame in window coordinates, to have bounds specify .local, to have in some
+    // parent provide named coordinate space correspondingly.
+    func cgRect(_ binding: Binding<CGRect?>, _ space: CoordinateSpace = .global) -> some View {
+        self.background(rectReader(binding, space))
+    }
+    
+    func window(_ binding: Binding<NSWindow?>) -> some View {
+        self.background(WindowAccessor(window: binding))
+    }
+}
+
+func rectReader(_ binding: Binding<CGRect?>, _ space: CoordinateSpace = .global) -> some View {
+    GeometryReader { (geometry) -> Color in
+        let rect = geometry.frame(in: space)
+        DispatchQueue.main.async {
+            binding.wrappedValue = rect
+        }
+        return .clear
     }
 }

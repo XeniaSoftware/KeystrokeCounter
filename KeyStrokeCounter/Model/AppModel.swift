@@ -15,6 +15,9 @@ class AppModel: ObservableObject, Codable {
     @Published var keystrokeCollection: KeystrokeCollection
     @Published var keyboardDefinition: KeyboardDefinition
     @Published var color: Color
+    @Published var showFloatingWindow: Bool
+    @Published var floatingWindowPosition: Position
+    @Published var opacity: Double
     
     var sorted: [Int]
     var lastSorted: Date
@@ -24,13 +27,19 @@ class AppModel: ObservableObject, Codable {
     }
     
     init(keystrokeCollection: KeystrokeCollection = [:],
-        keyboardDefinition: KeyboardDefinition = Qwerty,
-        color: Color = Color(red: 1, green: 1, blue: 1)
+         keyboardDefinition: KeyboardDefinition = Qwerty,
+         color: Color = Color(red: 1, green: 1, blue: 1),
+         showFloatingWindow: Bool = true,
+         floatingWindowPosition: Position = .bottomRight,
+         opacity: Double = 0.7
     ) {
         self.keystrokeCollection = keystrokeCollection
         self.keyboardDefinition = keyboardDefinition
         self.color = color
         self.lastSorted = Date.distantPast
+        self.showFloatingWindow = showFloatingWindow
+        self.floatingWindowPosition = floatingWindowPosition
+        self.opacity = opacity
         self.sorted = []
     }
     
@@ -45,14 +54,14 @@ class AppModel: ObservableObject, Codable {
     }
     
     func getCount(for key: KeyModel) -> Int {
-        return [key.topLabel, key.middleLabel, key.bottomLabel].reduce(0, {(prev, current) in
-            let count = getModel().keys[current] ?? 0
-            return prev+count;
-        })
+        return [key.topLabel, key.middleLabel, key.bottomLabel].reduce(into: 0) {
+            $0 += getModel().keys[$1] ?? 0
+        }
+
     }
     
     func sort() {
-        let now = Date()
+//        let now = Date()
         
         let keys = keyboardDefinition.reduce(into: [] as [KeyModel]) { prev, current in
             for keymodel in current {
@@ -67,8 +76,6 @@ class AppModel: ObservableObject, Codable {
         
         self.sorted = Array(Set(counts)).sorted()
         
-        print("SORTING TOOK", Date().timeIntervalSince(now), "SECONDS")
-
         self.lastSorted = Date()
     }
     
@@ -86,20 +93,23 @@ class AppModel: ObservableObject, Codable {
     // MARK: Codable
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
         self.keystrokeCollection = try container.decode(Dictionary<String, KeyStrokeModel>.self, forKey: .keystrokeCollection)
         self.keyboardDefinition = try container.decode(KeyboardDefinition.self, forKey: .keyboardDefinition)
+        self.showFloatingWindow = try container.decodeIfPresent(Bool.self, forKey: .showFloating) ?? true
         let red = try container.decode(CGFloat.self, forKey: .red)
         let green = try container.decode(CGFloat.self, forKey: .green)
         let blue = try container.decode(CGFloat.self, forKey: .blue)
         self.color = Color(red: red, green: green, blue: blue)
         self.lastSorted = Date.distantPast
+        self.floatingWindowPosition = try container.decodeIfPresent(Position.self, forKey: .position) ?? .bottomRight
+        self.opacity = try container.decodeIfPresent(Double.self, forKey: .opacity) ?? 0.6
         self.sorted = []
         self.sort()
+        print("SHOWFLOAT?", self.showFloatingWindow)
     }
     
     enum CodingKeys: CodingKey {
-        case keystrokeCollection, keyboardDefinition, red, green, blue
+        case keystrokeCollection, keyboardDefinition, red, green, blue, showFloating, position, opacity
     }
     
     func encode(to encoder: Encoder) throws {
@@ -110,5 +120,8 @@ class AppModel: ObservableObject, Codable {
         try container.encode(rgb?[0] ?? 1, forKey: .red)
         try container.encode(rgb?[1] ?? 1, forKey: .green)
         try container.encode(rgb?[2] ?? 1, forKey: .blue)
+        try container.encode(showFloatingWindow, forKey: .showFloating)
+        try container.encode(floatingWindowPosition, forKey: .position)
+        try container.encode(opacity, forKey: .opacity)
     }
 }
