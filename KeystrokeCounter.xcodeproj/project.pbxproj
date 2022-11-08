@@ -59,7 +59,7 @@
 		3779A1422912076200FA1B3F /* SpecialCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialCharacters.swift; sourceTree = "<group>"; };
 		3779A14729121CE900FA1B3F /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
 		3779A14929121F6500FA1B3F /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
-		37977425290F71BF000DFE4F /* KeyStrokeCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyStrokeCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		37977425290F71BF000DFE4F /* KeystrokeCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeystrokeCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37977428290F71BF000DFE4F /* KeyStrokeCounterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStrokeCounterApp.swift; sourceTree = "<group>"; };
 		3797742A290F71BF000DFE4F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3797742C290F71C0000DFE4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		3797741C290F71BF000DFE4F = {
 			isa = PBXGroup;
 			children = (
-				37977427290F71BF000DFE4F /* KeyStrokeCounter */,
+				37977427290F71BF000DFE4F /* KeystrokeCounter */,
 				37977426290F71BF000DFE4F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -159,12 +159,12 @@
 		37977426290F71BF000DFE4F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				37977425290F71BF000DFE4F /* KeyStrokeCounter.app */,
+				37977425290F71BF000DFE4F /* KeystrokeCounter.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		37977427290F71BF000DFE4F /* KeyStrokeCounter */ = {
+		37977427290F71BF000DFE4F /* KeystrokeCounter */ = {
 			isa = PBXGroup;
 			children = (
 				376CF1422917740A003A91C0 /* Info.plist */,
@@ -182,7 +182,7 @@
 				37977431290F71C0000DFE4F /* KeyStrokeCounter.entitlements */,
 				3797742E290F71C0000DFE4F /* Preview Content */,
 			);
-			path = KeyStrokeCounter;
+			path = KeystrokeCounter;
 			sourceTree = "<group>";
 		};
 		3797742E290F71C0000DFE4F /* Preview Content */ = {
@@ -196,9 +196,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		37977424290F71BF000DFE4F /* KeyStrokeCounter */ = {
+		37977424290F71BF000DFE4F /* KeystrokeCounter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 37977434290F71C0000DFE4F /* Build configuration list for PBXNativeTarget "KeyStrokeCounter" */;
+			buildConfigurationList = 37977434290F71C0000DFE4F /* Build configuration list for PBXNativeTarget "KeystrokeCounter" */;
 			buildPhases = (
 				37977421290F71BF000DFE4F /* Sources */,
 				37977422290F71BF000DFE4F /* Frameworks */,
@@ -208,9 +208,9 @@
 			);
 			dependencies = (
 			);
-			name = KeyStrokeCounter;
+			name = KeystrokeCounter;
 			productName = KeyStrokeCounter;
-			productReference = 37977425290F71BF000DFE4F /* KeyStrokeCounter.app */;
+			productReference = 37977425290F71BF000DFE4F /* KeystrokeCounter.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -228,7 +228,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 37977420290F71BF000DFE4F /* Build configuration list for PBXProject "KeyStrokeCounter" */;
+			buildConfigurationList = 37977420290F71BF000DFE4F /* Build configuration list for PBXProject "KeystrokeCounter" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -241,7 +241,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				37977424290F71BF000DFE4F /* KeyStrokeCounter */,
+				37977424290F71BF000DFE4F /* KeystrokeCounter */,
 			);
 		};
 /* End PBXProject section */
@@ -471,7 +471,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		37977420290F71BF000DFE4F /* Build configuration list for PBXProject "KeyStrokeCounter" */ = {
+		37977420290F71BF000DFE4F /* Build configuration list for PBXProject "KeystrokeCounter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37977432290F71C0000DFE4F /* Debug */,
@@ -480,7 +480,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		37977434290F71C0000DFE4F /* Build configuration list for PBXNativeTarget "KeyStrokeCounter" */ = {
+		37977434290F71C0000DFE4F /* Build configuration list for PBXNativeTarget "KeystrokeCounter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37977435290F71C0000DFE4F /* Debug */,
