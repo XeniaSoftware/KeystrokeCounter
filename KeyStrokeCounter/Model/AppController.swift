@@ -47,9 +47,11 @@ class AppController: ObservableObject {
         updateMenuBar()
     }
     
-    private func updateMenuBar() {
+    func updateMenuBar() {
         if let delegate = self.delegate {
-            delegate.statusBarItem.button?.title = (appModel?.total ?? 0).shortString()
+            var total = appModel?.total ?? 0
+            var menuBarString = (appModel?.useShortMenuString ?? true) ? total.shortString() : String(total)
+            delegate.statusBarItem.button?.title = menuBarString
         }
     }
     

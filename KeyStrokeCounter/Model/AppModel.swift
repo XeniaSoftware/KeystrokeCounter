@@ -21,6 +21,7 @@ class AppModel: ObservableObject, Codable {
     
     var sorted: [Int]
     var lastSorted: Date
+    var useShortMenuString: Bool
     
     var total: Int {
         return getModel().total
@@ -31,7 +32,8 @@ class AppModel: ObservableObject, Codable {
          color: Color = Color(red: 1, green: 1, blue: 1),
          showFloatingWindow: Bool = false,
          floatingWindowPosition: Position = .bottomRight,
-         opacity: Double = 0.7
+         opacity: Double = 0.7,
+         useShortMenuString: Bool = true
     ) {
         self.keystrokeCollection = keystrokeCollection
         self.keyboardDefinition = keyboardDefinition
@@ -40,6 +42,7 @@ class AppModel: ObservableObject, Codable {
         self.showFloatingWindow = showFloatingWindow
         self.floatingWindowPosition = floatingWindowPosition
         self.opacity = opacity
+        self.useShortMenuString = useShortMenuString
         self.sorted = []
     }
     
@@ -100,12 +103,19 @@ class AppModel: ObservableObject, Codable {
         self.lastSorted = Date.distantPast
         self.floatingWindowPosition = try container.decodeIfPresent(Position.self, forKey: .position) ?? .bottomRight
         self.opacity = try container.decodeIfPresent(Double.self, forKey: .opacity) ?? 0.6
+        self.useShortMenuString = try container.decodeIfPresent(Bool.self, forKey: .menuBarShortString) ?? true
         self.sorted = []
         self.sort()
     }
     
     enum CodingKeys: CodingKey {
-        case keystrokeCollection, keyboardDefinition, red, green, blue, showFloating, position, opacity
+        case keystrokeCollection
+        case keyboardDefinition
+        case red, green, blue
+        case showFloating
+        case position
+        case opacity
+        case menuBarShortString
     }
     
     func encode(to encoder: Encoder) throws {
@@ -119,5 +129,6 @@ class AppModel: ObservableObject, Codable {
         try container.encode(showFloatingWindow, forKey: .showFloating)
         try container.encode(floatingWindowPosition, forKey: .position)
         try container.encode(opacity, forKey: .opacity)
+        try container.encode(useShortMenuString, forKey: .menuBarShortString)
     }
 }

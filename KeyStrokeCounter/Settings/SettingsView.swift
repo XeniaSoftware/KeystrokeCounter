@@ -18,6 +18,7 @@ struct SettingsView: View {
                 ColorPicker(selection: $appController.appModel.color, supportsOpacity: false) {
                     Text("Key color: ")
                 }
+                Toggle("Use short number in menu bar", isOn: $appController.appModel.useShortMenuString)
                 Toggle("Show floating window", isOn: $appController.appModel.showFloatingWindow)
                 Picker("Floating window position", selection: $appController.appModel.floatingWindowPosition) {
                     ForEach(Position.allCases, id: \.rawValue) { position in
@@ -54,6 +55,10 @@ struct SettingsView: View {
             .onChange(of: appController.appModel.floatingWindowPosition) { _ in
                 appController.save()
             }
+            .onChange(of: appController.appModel.useShortMenuString, perform: { _ in
+                appController.save()
+                appController.updateMenuBar()
+            })
             .onChange(of: window, perform: { window in
                 if let settings = window {
                     appController.addWindow(for: .Settings, reference: settings)
