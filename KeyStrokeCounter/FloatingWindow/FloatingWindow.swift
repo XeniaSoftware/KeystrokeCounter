@@ -25,6 +25,9 @@ struct FloatingWindow: View {
                 .padding(.bottom)
                 .background(WindowAccessor(window: $window))
                 .onChange(of: window, perform: { newValue in
+                    if let opacity = appController.appModel?.opacity {
+                        window?.alphaValue = opacity
+                    }
                     window?.level = .floating
                     window?.standardWindowButton(.zoomButton)?.isHidden = true
                     window?.standardWindowButton(.closeButton)?.isHidden = true
