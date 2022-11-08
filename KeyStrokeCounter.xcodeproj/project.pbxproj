@@ -21,10 +21,10 @@
 		376CF1482918324A003A91C0 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376CF1472918324A003A91C0 /* View.swift */; };
 		376CF14B291833EF003A91C0 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376CF14A291833EF003A91C0 /* MenuBar.swift */; };
 		376CF14D291834B3003A91C0 /* CountMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376CF14C291834B3003A91C0 /* CountMenu.swift */; };
-		376CF14F291838AC003A91C0 /* ShowFloatingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376CF14E291838AC003A91C0 /* ShowFloatingMenu.swift */; };
 		376CF1542918530A003A91C0 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376CF1532918530A003A91C0 /* SettingsView.swift */; };
 		376CF1562918536C003A91C0 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376CF1552918536C003A91C0 /* Windows.swift */; };
 		376CF1582918BBA5003A91C0 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376CF1572918BBA5003A91C0 /* Position.swift */; };
+		376CF15A2919FFBA003A91C0 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 376CF1592919FFBA003A91C0 /* Int.swift */; };
 		3779A13D2910BBE900FA1B3F /* KeyStrokeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779A13C2910BBE900FA1B3F /* KeyStrokeModel.swift */; };
 		3779A1432912076200FA1B3F /* SpecialCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779A1422912076200FA1B3F /* SpecialCharacters.swift */; };
 		3779A14829121CE900FA1B3F /* Key.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3779A14729121CE900FA1B3F /* Key.swift */; };
@@ -51,10 +51,10 @@
 		376CF1472918324A003A91C0 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		376CF14A291833EF003A91C0 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		376CF14C291834B3003A91C0 /* CountMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountMenu.swift; sourceTree = "<group>"; };
-		376CF14E291838AC003A91C0 /* ShowFloatingMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowFloatingMenu.swift; sourceTree = "<group>"; };
 		376CF1532918530A003A91C0 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		376CF1552918536C003A91C0 /* Windows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
 		376CF1572918BBA5003A91C0 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
+		376CF1592919FFBA003A91C0 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		3779A13C2910BBE900FA1B3F /* KeyStrokeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyStrokeModel.swift; sourceTree = "<group>"; };
 		3779A1422912076200FA1B3F /* SpecialCharacters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialCharacters.swift; sourceTree = "<group>"; };
 		3779A14729121CE900FA1B3F /* Key.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Key.swift; sourceTree = "<group>"; };
@@ -94,6 +94,7 @@
 				376CF1312916398C003A91C0 /* Color.swift */,
 				376CF13329163A98003A91C0 /* Date.swift */,
 				376CF1472918324A003A91C0 /* View.swift */,
+				376CF1592919FFBA003A91C0 /* Int.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -111,7 +112,6 @@
 			children = (
 				376CF14A291833EF003A91C0 /* MenuBar.swift */,
 				376CF14C291834B3003A91C0 /* CountMenu.swift */,
-				376CF14E291838AC003A91C0 /* ShowFloatingMenu.swift */,
 			);
 			path = MenuBar;
 			sourceTree = "<group>";
@@ -167,13 +167,13 @@
 		37977427290F71BF000DFE4F /* KeyStrokeCounter */ = {
 			isa = PBXGroup;
 			children = (
-				376CF150291852EE003A91C0 /* Settings */,
 				376CF1422917740A003A91C0 /* Info.plist */,
-				376CF149291833DE003A91C0 /* MenuBar */,
-				376CF13F29176558003A91C0 /* FloatingWindow */,
 				376CF13029163982003A91C0 /* Extensions */,
+				376CF13F29176558003A91C0 /* FloatingWindow */,
 				3779A14629121CDF00FA1B3F /* Keyboard */,
+				376CF149291833DE003A91C0 /* MenuBar */,
 				3779A13B2910BBC400FA1B3F /* Model */,
+				376CF150291852EE003A91C0 /* Settings */,
 				37977428290F71BF000DFE4F /* KeyStrokeCounterApp.swift */,
 				376CF1392916BD74003A91C0 /* MainView.swift */,
 				3797742A290F71BF000DFE4F /* ContentView.swift */,
@@ -269,7 +269,6 @@
 				376CF12D291638BE003A91C0 /* AppModel.swift in Sources */,
 				3779A14A29121F6500FA1B3F /* Keyboard.swift in Sources */,
 				376CF13C2916BFE4003A91C0 /* Dvorak.swift in Sources */,
-				376CF14F291838AC003A91C0 /* ShowFloatingMenu.swift in Sources */,
 				376CF1322916398C003A91C0 /* Color.swift in Sources */,
 				370AE5632913256C008DA26A /* Qwerty.swift in Sources */,
 				376CF1412917656A003A91C0 /* FloatingWindow.swift in Sources */,
@@ -280,6 +279,7 @@
 				376CF1582918BBA5003A91C0 /* Position.swift in Sources */,
 				376CF14B291833EF003A91C0 /* MenuBar.swift in Sources */,
 				3779A1432912076200FA1B3F /* SpecialCharacters.swift in Sources */,
+				376CF15A2919FFBA003A91C0 /* Int.swift in Sources */,
 				370AE565291325CE008DA26A /* KeyModel.swift in Sources */,
 				376CF1482918324A003A91C0 /* View.swift in Sources */,
 				376CF1382916BCD9003A91C0 /* LoadingView.swift in Sources */,

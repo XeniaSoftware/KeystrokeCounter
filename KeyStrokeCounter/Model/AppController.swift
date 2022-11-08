@@ -9,6 +9,9 @@ import Foundation
 import AppKit
     
 class AppController: ObservableObject {
+    static let shared = AppController()
+    var delegate: AppDelegate? = nil
+    
     @Published public var appModel: AppModel!
     private var windows: [Windows: NSWindow] = [:]
     
@@ -26,6 +29,7 @@ class AppController: ObservableObject {
         objectWillChange.send()
         save()
         appModel.sort()
+        updateMenuBar()
     }
     
     func addWindow(for window: Windows, reference: NSWindow) {
@@ -38,8 +42,15 @@ class AppController: ObservableObject {
     }
     
     private func postLoad() {
-        self.registerEventListener()
-        self.showFloatingWindow()
+        registerEventListener()
+        showFloatingWindow()
+        updateMenuBar()
+    }
+    
+    private func updateMenuBar() {
+        if let delegate = self.delegate {
+            delegate.statusBarItem.button?.title = (appModel?.total ?? 0).shortString()
+        }
     }
     
     private func registerEventListener() {

@@ -29,7 +29,7 @@ class AppModel: ObservableObject, Codable {
     init(keystrokeCollection: KeystrokeCollection = [:],
          keyboardDefinition: KeyboardDefinition = Qwerty,
          color: Color = Color(red: 1, green: 1, blue: 1),
-         showFloatingWindow: Bool = true,
+         showFloatingWindow: Bool = false,
          floatingWindowPosition: Position = .bottomRight,
          opacity: Double = 0.7
     ) {
@@ -61,8 +61,6 @@ class AppModel: ObservableObject, Codable {
     }
     
     func sort() {
-//        let now = Date()
-        
         let keys = keyboardDefinition.reduce(into: [] as [KeyModel]) { prev, current in
             for keymodel in current {
                 if keymodel.isSplit {
@@ -75,7 +73,6 @@ class AppModel: ObservableObject, Codable {
         let counts = keys.map { getCount(for: $0) }
         
         self.sorted = Array(Set(counts)).sorted()
-        
         self.lastSorted = Date()
     }
     
@@ -105,7 +102,6 @@ class AppModel: ObservableObject, Codable {
         self.opacity = try container.decodeIfPresent(Double.self, forKey: .opacity) ?? 0.6
         self.sorted = []
         self.sort()
-        print("SHOWFLOAT?", self.showFloatingWindow)
     }
     
     enum CodingKeys: CodingKey {
