@@ -12,6 +12,6 @@ extension Int {
         if self < 1000 {
             return String(self)
         }
-        return String(self / 1000) + "K"
+        return String(self / 1000) + "k"
     }
 }
