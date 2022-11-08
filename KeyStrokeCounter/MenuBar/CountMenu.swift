@@ -8,9 +8,16 @@
 import SwiftUI
 
 struct CountMenu: View {
+    @StateObject var appController = AppController.shared
+    
+    var total: Int {
+        return appController.appModel?.total ?? 0
+    }
+    
     var body: some View {
         HStack {
-            Text("Keycount: 30000")
+            Text("Keycount: " + String(total))
+                .foregroundColor(.secondary)
             Spacer()
         }
         .padding(.leading)
