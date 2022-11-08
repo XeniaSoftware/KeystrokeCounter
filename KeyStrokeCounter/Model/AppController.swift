@@ -49,8 +49,8 @@ class AppController: ObservableObject {
     
     func updateMenuBar() {
         if let delegate = self.delegate {
-            var total = appModel?.total ?? 0
-            var menuBarString = (appModel?.useShortMenuString ?? true) ? total.shortString() : String(total)
+            let total = appModel?.total ?? 0
+            let menuBarString = (appModel?.useShortMenuString ?? true) ? total.shortString() : String(total)
             delegate.statusBarItem.button?.title = menuBarString
         }
     }
@@ -99,22 +99,28 @@ class AppController: ObservableObject {
 }
 
 extension AppController {
+
+
     // MARK: Persistence
-    private static var documentsFolder: URL {
+    private static var applicationSupportDirectory: URL {
         do {
-            return try FileManager.default.url(
-                for: .documentDirectory,
+            let appSupport =  try FileManager.default.url(
+                for: .applicationSupportDirectory,
                 in: .userDomainMask,
                 appropriateFor: nil,
-                create: false
+                create: true
             )
+            let bundle = Bundle.main.bundleIdentifier ?? "io.staggs.keystrokeCounter"
+            let path = appSupport.appendingPathComponent(bundle, isDirectory: true)
+            try FileManager.default.createDirectory(at: path, withIntermediateDirectories: true, attributes: nil)
+            return path
         } catch {
-            fatalError("Can't find documents directory.")
+            fatalError("Can't get AppSupport directory.")
         }
     }
     
     private static var fileURL: URL {
-        return documentsFolder.appendingPathComponent("KeystrokeCounter.data")
+        return applicationSupportDirectory.appendingPathComponent("keystrokeCounter.data")
     }
     
     func load() {
