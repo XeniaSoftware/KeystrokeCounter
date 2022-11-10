@@ -11,10 +11,12 @@ struct SettingsView: View {
     @EnvironmentObject var appController: AppController
     @Environment(\.openURL) var openURL
     @State private var window: NSWindow?
+    @State var hideIcon = false
 
     var body: some View {
         if appController.appModel != nil {
             VStack {
+                Toggle("Hide dock icon", isOn: $hideIcon)
                 ColorPicker(selection: $appController.appModel.color, supportsOpacity: false) {
                     Text("Key color: ")
                 }
@@ -38,7 +40,7 @@ struct SettingsView: View {
                 }
             }
             .padding(.all)
-            .frame(width: 350, height: 150)
+            .frame(width: 350, height: 250)
             .onChange(of: appController.appModel.showFloatingWindow) { showFloatingValue in
                 if showFloatingValue == true {
                     if let url = URL(string: "keystroke://" + Windows.Floating.rawValue) {
@@ -62,6 +64,13 @@ struct SettingsView: View {
             .onChange(of: window, perform: { window in
                 if let settings = window {
                     appController.addWindow(for: .Settings, reference: settings)
+                }
+            })
+            .onChange(of: hideIcon, perform: { hideIcon in
+                if hideIcon {
+                    NSApplication.shared.setActivationPolicy(.accessory)
+                } else {
+                    NSApplication.shared.setActivationPolicy(.regular)
                 }
             })
             .window($window)

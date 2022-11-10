@@ -45,6 +45,15 @@ class AppController: ObservableObject {
         registerEventListener()
         showFloatingWindow()
         updateMenuBar()
+        setApplicationPresentationMode()
+    }
+    
+    func setApplicationPresentationMode() {
+        if appModel.hideAppIcon {
+            NSApplication.shared.setActivationPolicy(.accessory)
+        } else {
+            NSApplication.shared.setActivationPolicy(.regular)
+        }
     }
     
     func updateMenuBar() {
