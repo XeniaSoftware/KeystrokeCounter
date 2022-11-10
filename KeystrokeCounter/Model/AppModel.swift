@@ -19,6 +19,7 @@ class AppModel: ObservableObject, Codable {
     @Published var floatingWindowPosition: Position
     @Published var opacity: Double
     @Published var hideAppIcon: Bool
+    @Published var hideMenuBar: Bool
     
     var sorted: [Int]
     var lastSorted: Date
@@ -35,7 +36,8 @@ class AppModel: ObservableObject, Codable {
          floatingWindowPosition: Position = .bottomRight,
          opacity: Double = 0.7,
          useShortMenuString: Bool = true,
-         hideAppIcon: Bool = false
+         hideAppIcon: Bool = false,
+         hideMenuBar: Bool = false
     ) {
         self.keystrokeCollection = keystrokeCollection
         self.keyboardDefinition = keyboardDefinition
@@ -46,6 +48,7 @@ class AppModel: ObservableObject, Codable {
         self.opacity = opacity
         self.useShortMenuString = useShortMenuString
         self.hideAppIcon = hideAppIcon
+        self.hideMenuBar = hideMenuBar
         self.sorted = []
     }
     
@@ -108,6 +111,7 @@ class AppModel: ObservableObject, Codable {
         self.opacity = try container.decodeIfPresent(Double.self, forKey: .opacity) ?? 0.6
         self.useShortMenuString = try container.decodeIfPresent(Bool.self, forKey: .menuBarShortString) ?? true
         self.hideAppIcon = try container.decodeIfPresent(Bool.self, forKey: .hideAppIcon) ?? false
+        self.hideMenuBar = try container.decodeIfPresent(Bool.self, forKey: .hideMenuBar) ?? false
         self.sorted = []
         self.sort()
     }
@@ -121,6 +125,7 @@ class AppModel: ObservableObject, Codable {
         case opacity
         case menuBarShortString
         case hideAppIcon
+        case hideMenuBar
     }
     
     func encode(to encoder: Encoder) throws {
@@ -136,5 +141,6 @@ class AppModel: ObservableObject, Codable {
         try container.encode(opacity, forKey: .opacity)
         try container.encode(useShortMenuString, forKey: .menuBarShortString)
         try container.encode(hideAppIcon, forKey: .hideAppIcon)
+        try container.encode(hideMenuBar, forKey: .hideMenuBar)
     }
 }

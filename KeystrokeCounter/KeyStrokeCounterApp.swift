@@ -48,14 +48,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         AppDelegate.instance = self
         AppController.shared.delegate = self
-
         NSWindow.allowsAutomaticWindowTabbing = false
-//        let statusBarImage = NSImage(
-//            systemSymbolName: "keyboard.chevron.compact.down",
-//            accessibilityDescription: nil
-//        )
+
         statusBarItem.button?.title = String(AppController.shared.appModel?.total ?? 0)
-//        statusBarItem.button?.image = statusBarImage
         statusBarItem.menu = menu.build()
     }
 }
