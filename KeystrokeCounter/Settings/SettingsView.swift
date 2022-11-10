@@ -11,12 +11,12 @@ struct SettingsView: View {
     @EnvironmentObject var appController: AppController
     @Environment(\.openURL) var openURL
     @State private var window: NSWindow?
-    @State var hideIcon = false
 
     var body: some View {
         if appController.appModel != nil {
             VStack {
-                Toggle("Hide dock icon", isOn: $hideIcon)
+                Toggle("Hide dock icon", isOn: $appController.appModel.hideAppIcon)
+                Toggle("Hide menu bar icon", isOn: $appController.appModel.hideMenuBar)
                 ColorPicker(selection: $appController.appModel.color, supportsOpacity: false) {
                     Text("Key color: ")
                 }
@@ -66,12 +66,13 @@ struct SettingsView: View {
                     appController.addWindow(for: .Settings, reference: settings)
                 }
             })
-            .onChange(of: hideIcon, perform: { hideIcon in
-                if hideIcon {
-                    NSApplication.shared.setActivationPolicy(.accessory)
-                } else {
-                    NSApplication.shared.setActivationPolicy(.regular)
-                }
+            .onChange(of: appController.appModel.hideAppIcon, perform: { _ in
+                appController.setApplicationPresentationMode()
+                appController.save()
+            })
+            .onChange(of: appController.appModel.hideMenuBar, perform: { _ in
+                appController.setMenuBarVisibility()
+                appController.save()
             })
             .window($window)
         }

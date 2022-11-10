@@ -11,7 +11,7 @@ import AppKit
 class AppController: ObservableObject {
     static let shared = AppController()
     var delegate: AppDelegate? = nil
-    
+
     @Published public var appModel: AppModel!
     private var windows: [Windows: NSWindow] = [:]
     
@@ -46,6 +46,7 @@ class AppController: ObservableObject {
         showFloatingWindow()
         updateMenuBar()
         setApplicationPresentationMode()
+        setMenuBarVisibility()
     }
     
     func setApplicationPresentationMode() {
@@ -56,12 +57,18 @@ class AppController: ObservableObject {
         }
     }
     
-    func updateMenuBar() {
-        if let delegate = self.delegate {
-            let total = appModel?.total ?? 0
-            let menuBarString = (appModel?.useShortMenuString ?? true) ? total.shortString() : String(total)
-            delegate.statusBarItem.button?.title = menuBarString
+    func setMenuBarVisibility() {
+        if appModel.hideMenuBar {
+            delegate?.statusBarItem.isVisible = false
+        } else {
+            delegate?.statusBarItem.isVisible = true
         }
+    }
+    
+    func updateMenuBar() {
+        let total = appModel?.total ?? 0
+        let menuBarString = (appModel?.useShortMenuString ?? true) ? total.shortString() : String(total)
+        delegate?.statusBarItem.button?.title = menuBarString
     }
     
     private func registerEventListener() {
