@@ -97,7 +97,7 @@ class AppController: ObservableObject {
     
     func showHeatmap() {
         if let window = windows[.Heatmap] {
-            window.makeKeyAndOrderFront(self)
+            window.focus()
         } else {
             if let url = URL(string: "keystroke://" + Windows.Heatmap.rawValue) {
                 NSWorkspace.shared.open(url)
@@ -107,7 +107,7 @@ class AppController: ObservableObject {
     
     func showSettings() {
         if let window = windows[.Settings] {
-            window.makeKeyAndOrderFront(self)
+            window.focus()
         } else {
             NSApp.sendAction(Selector(("showPreferencesWindow:")), to: nil, from: nil)
         }
