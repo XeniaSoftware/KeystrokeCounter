@@ -33,7 +33,8 @@ class AppController: ObservableObject {
     }
     
     func addWindow(for window: Windows, reference: NSWindow) {
-        // If we have a different window, close it.
+        // If we have a different window, close it. This is intended
+        // to prevent multiple copies of the same window
         if let oldWindow = self.windows[window],
            oldWindow.identifier == reference.identifier {
             oldWindow.close()
