@@ -144,6 +144,7 @@ extension AppController {
             guard let data = try? Data(contentsOf: Self.fileURL) else {
                 DispatchQueue.main.async {
                     self?.appModel = AppModel()
+                    self?.postLoad()
                 }
                 return
             }
