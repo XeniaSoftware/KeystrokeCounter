@@ -9,8 +9,9 @@ import SwiftUI
 
 struct Key: View {
     private let baseSize: CGFloat = 50
-    
     public let model: KeyModel
+    public let background = Color(red: 0.22, green: 0.22, blue: 0.22)
+    public let cornerRadius: CGFloat = 10
     
     @EnvironmentObject var appController: AppController
     @State private var hovered: Bool = false
@@ -22,15 +23,15 @@ struct Key: View {
     
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .strokeBorder(.black, lineWidth: 1)
-                .background(
-                    RoundedRectangle(cornerRadius: 10).fill(color())
-                        .background(
-                            RoundedRectangle(cornerRadius: 10).fill(Color(red: 0.22, green: 0.22, blue: 0.22))
-                        )
-                )
-                .frame(width: model.scale * baseSize, height: model.heightScale * baseSize)
+            ZStack {
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(background)
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .fill(color())
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .strokeBorder(background)
+            }
+            .frame(width: model.scale * baseSize, height: model.heightScale * baseSize)
             VStack {
                 if hovered {
                     Text(String(appController.appModel.getCount(for: model)))
