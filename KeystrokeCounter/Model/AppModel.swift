@@ -75,7 +75,6 @@ class AppModel: ObservableObject, Codable {
     }
     
     func getCount(for char: String) -> Int {
-        print("getting count for char", char)
         return getModel().keys[char] ?? 0
     }
     

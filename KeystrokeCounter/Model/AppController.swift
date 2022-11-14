@@ -75,7 +75,6 @@ class AppController: ObservableObject {
     private func registerEventListener() {
         let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String : true]
         let accessEnabled = AXIsProcessTrustedWithOptions(options)
-        print("ACCESS?", accessEnabled)
 
         NSEvent.addGlobalMonitorForEvents(
             matching: .keyDown,
@@ -155,7 +154,6 @@ extension AppController {
             DispatchQueue.main.async {
                 self?.appModel = appModel
                 self?.postLoad()
-                print("LOADED")
             }
         }
     }

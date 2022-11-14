@@ -36,6 +36,7 @@ struct KeyboardSettingsTab: View {
                     Text("Max")
                 }
             }
+            .frame(width: 350)
         }
     }
 }
