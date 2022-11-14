@@ -11,7 +11,8 @@ struct Key: View {
     private let baseSize: CGFloat = 50
     public let model: KeyModel
     public let background = Color(red: 0.22, green: 0.22, blue: 0.22)
-    
+
+    @Binding var showLabels: Bool    
     @EnvironmentObject var appController: AppController
     @State private var hovered: Bool = false
     
@@ -23,7 +24,7 @@ struct Key: View {
     func getLabel(for keyLabel: KeyLabel) -> String {
         let label = model.getLabel(for: keyLabel)
         
-        if hovered, label != "" {
+        if hovered || showLabels, label != "" {
             return String(appController.appModel.getCount(for: label))
         }
         return label
@@ -52,20 +53,9 @@ struct Key: View {
             }
             .frame(width: model.scale * baseSize, height: model.heightScale * baseSize)
         }
-        .onAppear {
-            NSEvent.addLocalMonitorForEvents(matching: .flagsChanged) { event in
-                self.hovered = event.modifierFlags.contains(.option)
-                return event
-            }
-        }
         .onHover { hovered in
             self.hovered = hovered
         }
     }
 }
 
-struct Key_Previews: PreviewProvider {
-    static var previews: some View {
-        Key(model: KeyModel(middleLabel: "esc"))
-    }
-}

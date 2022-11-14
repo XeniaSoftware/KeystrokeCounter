@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Keyboard: View {
     @EnvironmentObject var appController: AppController
+    @State var showLabels = false
 
     var body: some View {
         VStack(spacing: appController.appModel.keySpacing) {
@@ -18,17 +19,25 @@ struct Keyboard: View {
                         if key.isSplit {
                             VStack(spacing: 0) {
                                 ForEach(key.splitKeys) { splitKey in
-                                    Key(model: splitKey)
+                                    Key(model: splitKey, showLabels: $showLabels)
                                 }
                             }
                         }
                         else {
-                            Key(model: key)
+                            Key(model: key, showLabels: $showLabels)
                         }
                     }
                 }
             }
         }
+        .padding()
+        .onAppear {
+            NSEvent.addLocalMonitorForEvents(matching: .flagsChanged) { event in
+                self.showLabels = event.modifierFlags.contains(.option)
+                return event
+            }
+        }
+        
     }
 }
 
