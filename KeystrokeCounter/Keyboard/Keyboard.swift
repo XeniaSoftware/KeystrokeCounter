@@ -11,9 +11,9 @@ struct Keyboard: View {
     @EnvironmentObject var appController: AppController
 
     var body: some View {
-        VStack {
+        VStack(spacing: appController.appModel.keySpacing) {
             ForEach(appController.appModel.keyboardDefinition, id: \.self) { row in
-                HStack {
+                HStack(spacing: appController.appModel.keySpacing) {
                     ForEach(row, id: \.self) { key in
                         if key.isSplit {
                             VStack(spacing: 0) {
