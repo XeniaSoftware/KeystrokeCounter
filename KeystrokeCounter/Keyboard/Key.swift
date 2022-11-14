@@ -52,6 +52,12 @@ struct Key: View {
             }
             .frame(width: model.scale * baseSize, height: model.heightScale * baseSize)
         }
+        .onAppear {
+            NSEvent.addLocalMonitorForEvents(matching: .flagsChanged) { event in
+                self.hovered = event.modifierFlags.contains(.option)
+                return event
+            }
+        }
         .onHover { hovered in
             self.hovered = hovered
         }
