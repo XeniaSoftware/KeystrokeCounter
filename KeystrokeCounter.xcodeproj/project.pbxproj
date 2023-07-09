@@ -34,6 +34,8 @@
 		3797742B290F71BF000DFE4F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3797742A290F71BF000DFE4F /* ContentView.swift */; };
 		3797742D290F71C0000DFE4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3797742C290F71C0000DFE4F /* Assets.xcassets */; };
 		37977430290F71C0000DFE4F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3797742F290F71C0000DFE4F /* Preview Assets.xcassets */; };
+		37CEA9E92920AB26003B8B72 /* GeneralSettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CEA9E82920AB26003B8B72 /* GeneralSettingsTab.swift */; };
+		37CEA9EB2920B434003B8B72 /* KeyboardSettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37CEA9EA2920B434003B8B72 /* KeyboardSettingsTab.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		3797742C290F71C0000DFE4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3797742F290F71C0000DFE4F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		37977431290F71C0000DFE4F /* KeyStrokeCounter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KeyStrokeCounter.entitlements; sourceTree = "<group>"; };
+		37CEA9E82920AB26003B8B72 /* GeneralSettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralSettingsTab.swift; sourceTree = "<group>"; };
+		37CEA9EA2920B434003B8B72 /* KeyboardSettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardSettingsTab.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,8 @@
 			isa = PBXGroup;
 			children = (
 				376CF1532918530A003A91C0 /* SettingsView.swift */,
+				37CEA9E82920AB26003B8B72 /* GeneralSettingsTab.swift */,
+				37CEA9EA2920B434003B8B72 /* KeyboardSettingsTab.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -277,6 +283,7 @@
 				370AE5632913256C008DA26A /* Qwerty.swift in Sources */,
 				376CF1412917656A003A91C0 /* FloatingWindow.swift in Sources */,
 				3797742B290F71BF000DFE4F /* ContentView.swift in Sources */,
+				37CEA9EB2920B434003B8B72 /* KeyboardSettingsTab.swift in Sources */,
 				37977429290F71BF000DFE4F /* KeyStrokeCounterApp.swift in Sources */,
 				376CF14D291834B3003A91C0 /* CountMenu.swift in Sources */,
 				376CF13429163A98003A91C0 /* Date.swift in Sources */,
@@ -284,6 +291,7 @@
 				376CF14B291833EF003A91C0 /* MenuBar.swift in Sources */,
 				3779A1432912076200FA1B3F /* SpecialCharacters.swift in Sources */,
 				376CF15A2919FFBA003A91C0 /* Int.swift in Sources */,
+				37CEA9E92920AB26003B8B72 /* GeneralSettingsTab.swift in Sources */,
 				370AE565291325CE008DA26A /* KeyModel.swift in Sources */,
 				376CF1482918324A003A91C0 /* View.swift in Sources */,
 				376CF1382916BCD9003A91C0 /* LoadingView.swift in Sources */,

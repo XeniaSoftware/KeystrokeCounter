@@ -20,6 +20,8 @@ class AppModel: ObservableObject, Codable {
     @Published var opacity: Double
     @Published var hideAppIcon: Bool
     @Published var hideMenuBar: Bool
+    @Published var keyCornerRadius: CGFloat
+    @Published var keySpacing: CGFloat
     
     var sorted: [Int]
     var lastSorted: Date
@@ -37,7 +39,9 @@ class AppModel: ObservableObject, Codable {
          opacity: Double = 0.7,
          useShortMenuString: Bool = true,
          hideAppIcon: Bool = false,
-         hideMenuBar: Bool = false
+         hideMenuBar: Bool = false,
+         keyCornerRadius: CGFloat = 10,
+         keySpacing: CGFloat = 8
     ) {
         self.keystrokeCollection = keystrokeCollection
         self.keyboardDefinition = keyboardDefinition
@@ -49,6 +53,8 @@ class AppModel: ObservableObject, Codable {
         self.useShortMenuString = useShortMenuString
         self.hideAppIcon = hideAppIcon
         self.hideMenuBar = hideMenuBar
+        self.keyCornerRadius = keyCornerRadius
+        self.keySpacing = keySpacing
         self.sorted = []
     }
     
@@ -63,10 +69,13 @@ class AppModel: ObservableObject, Codable {
     }
     
     func getCount(for key: KeyModel) -> Int {
-        return [key.topLabel, key.middleLabel, key.bottomLabel].reduce(into: 0) {
+        return [key.getLabel(for: .top), key.getLabel(for: .middle), key.getLabel(for: .bottom)].reduce(into: 0) {
             $0 += getModel().keys[$1] ?? 0
         }
-
+    }
+    
+    func getCount(for char: String) -> Int {
+        return getModel().keys[char] ?? 0
     }
     
     func sort() {
@@ -112,6 +121,8 @@ class AppModel: ObservableObject, Codable {
         self.useShortMenuString = try container.decodeIfPresent(Bool.self, forKey: .menuBarShortString) ?? true
         self.hideAppIcon = try container.decodeIfPresent(Bool.self, forKey: .hideAppIcon) ?? false
         self.hideMenuBar = try container.decodeIfPresent(Bool.self, forKey: .hideMenuBar) ?? false
+        self.keyCornerRadius = try container.decodeIfPresent(CGFloat.self, forKey: .keyCornerRadius) ?? 10
+        self.keySpacing = try container.decodeIfPresent(CGFloat.self, forKey: .keySpacing) ?? 8
         self.sorted = []
         self.sort()
     }
@@ -126,6 +137,8 @@ class AppModel: ObservableObject, Codable {
         case menuBarShortString
         case hideAppIcon
         case hideMenuBar
+        case keyCornerRadius
+        case keySpacing
     }
     
     func encode(to encoder: Encoder) throws {
@@ -142,5 +155,7 @@ class AppModel: ObservableObject, Codable {
         try container.encode(useShortMenuString, forKey: .menuBarShortString)
         try container.encode(hideAppIcon, forKey: .hideAppIcon)
         try container.encode(hideMenuBar, forKey: .hideMenuBar)
+        try container.encode(keyCornerRadius, forKey: .keyCornerRadius)
+        try container.encode(keySpacing, forKey: .keySpacing)
     }
 }

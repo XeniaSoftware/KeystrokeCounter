@@ -52,5 +52,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         statusBarItem.button?.title = String(AppController.shared.appModel?.total ?? 0)
         statusBarItem.menu = menu.build()
+        NSApplication.shared.activate(ignoringOtherApps: true)
     }
 }
