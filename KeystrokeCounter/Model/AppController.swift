@@ -10,6 +10,7 @@ import AppKit
     
 class AppController: ObservableObject {
     static let shared = AppController()
+    private var timer: Timer?
     var delegate: AppDelegate? = nil
 
     @Published public var appModel: AppModel!
@@ -72,9 +73,29 @@ class AppController: ObservableObject {
         delegate?.statusBarItem.button?.title = menuBarString
     }
     
+    func hasAccessibilityAccess() -> Bool {
+        let trustedOptions = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String: true]
+        return AXIsProcessTrustedWithOptions(trustedOptions as CFDictionary)
+    }
+    
+    private func relaunchIfProcessTrusted() {
+        print("Checking for accessibility access")
+        if AXIsProcessTrusted() {
+            print("We have accessibility access")
+            let task = Process()
+            task.executableURL = URL(fileURLWithPath: Bundle.main.executablePath!)
+            try! task.run()
+            NSApplication.shared.terminate(self)
+        }
+    }
+    
     private func registerEventListener() {
-        let options: NSDictionary = [kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String : true]
-        let accessEnabled = AXIsProcessTrustedWithOptions(options)
+        if !hasAccessibilityAccess() {
+            timer = Timer.scheduledTimer(
+              withTimeInterval: 3.0,
+              repeats: true
+            ) { _ in self.relaunchIfProcessTrusted() }
+        }
 
         NSEvent.addGlobalMonitorForEvents(
             matching: .keyDown,
@@ -109,6 +130,7 @@ class AppController: ObservableObject {
         if let window = windows[.Settings] {
             window.focus()
         } else {
+            NSApplication.shared.activate(ignoringOtherApps: true)
             if #available(macOS 13, *) {
               NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
             } else {
